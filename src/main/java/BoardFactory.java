@@ -18,6 +18,9 @@ public class BoardFactory {
                 else if (currentChar == '.') {
                     board[i][j] = new Tile(GameObject.FOOD);
                 }
+                else if (currentChar == 'W') {
+                    board[i][j] = new Tile(GameObject.WALL);
+                }
             }
         }
         return board;
