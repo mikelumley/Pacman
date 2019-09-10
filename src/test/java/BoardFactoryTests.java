@@ -19,4 +19,20 @@ public class BoardFactoryTests {
 
         assertArrayEquals(expected, result);
     }
+
+    @Test
+    public void Given_CharBoardWithFood_When_CreateTileBoard_Then_ReturnTileBoardWithFood() {
+        char[] row1 = {'.', '.', '.'};
+        char[] row2 = {'.', 'P', '.'};
+        char[] row3 = {'.', '.', '.'};
+        char[][] charBoard = {row1, row2, row3};
+        Tile[][] result = BoardFactory.createBoardFromChars(charBoard);
+        Tile[][] expected = {
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.PACMAN), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
+        };
+
+        assertArrayEquals(expected, result);
+    }
 }
