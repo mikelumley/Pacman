@@ -6,6 +6,10 @@ public class BoardUpdater implements IBoardUpdater {
         return this.score;
     }
 
+    public boolean isGameOver() {
+        return score == 8;
+    }
+
     @Override
     public Tile[][] movePacman(Tile[][] board, Direction direction) {
         Position pacmanPosition = this.findPacman(board);
@@ -29,38 +33,51 @@ public class BoardUpdater implements IBoardUpdater {
     private void moveUp(Tile[][] board, Position position) {
         int nextXPosition = (position.getX() + board.length - 1) % board.length;
         Position nextPosition = new Position(nextXPosition, position.getY());
-        board[position.getX()][position.getY()].setObjectOnTile(GameObject.EMPTY);
-        this.calcScore(board, nextPosition);
-        board[nextPosition.getX()][position.getY()].setObjectOnTile(GameObject.PACMAN);
+        if (this.canMoveToPosition(board, nextPosition)) {
+            this.calcScore(board, nextPosition);
+            this.moveGameObject(board, GameObject.PACMAN, position, nextPosition);
+        }
     }
 
     private void moveDown(Tile[][] board, Position position) {
         int nextXPosition = (position.getX() + board.length + 1) % board.length;
         Position nextPosition = new Position(nextXPosition, position.getY());
-        board[position.getX()][position.getY()].setObjectOnTile(GameObject.EMPTY);
-        this.calcScore(board, nextPosition);
-        board[nextXPosition][position.getY()].setObjectOnTile(GameObject.PACMAN);
+        if (this.canMoveToPosition(board, nextPosition)) {
+            this.calcScore(board, nextPosition);
+            this.moveGameObject(board, GameObject.PACMAN, position, nextPosition);
+        }
     }
 
     private void moveLeft(Tile[][] board, Position position) {
         int nextYPosition = (position.getY() + board.length - 1) % board.length;
         Position nextPosition = new Position(position.getX(), nextYPosition);
-        board[position.getX()][position.getY()].setObjectOnTile(GameObject.EMPTY);
-        this.calcScore(board, nextPosition);
-        board[position.getX()][nextYPosition].setObjectOnTile(GameObject.PACMAN);
+        if (this.canMoveToPosition(board, nextPosition)) {
+            this.calcScore(board, nextPosition);
+            this.moveGameObject(board, GameObject.PACMAN, position, nextPosition);
+        }
     }
 
     private void moveRight(Tile[][] board, Position position) {
         int nextYPosition = (position.getY() + board.length + 1) % board.length;
         Position nextPosition = new Position(position.getX(), nextYPosition);
-        board[position.getX()][position.getY()].setObjectOnTile(GameObject.EMPTY);
-        this.calcScore(board, nextPosition);
-        board[position.getX()][nextYPosition].setObjectOnTile(GameObject.PACMAN);
+        if (this.canMoveToPosition(board, nextPosition)) {
+            this.calcScore(board, nextPosition);
+            this.moveGameObject(board, GameObject.PACMAN, position, nextPosition);
+        }
     }
 
     private void calcScore(Tile[][] board, Position nextPosition) {
         if (board[nextPosition.getX()][nextPosition.getY()].getObjectOnTile() == GameObject.FOOD)
             score++;
+    }
+
+    private boolean canMoveToPosition(Tile[][] board, Position nextPosition) {
+        return board[nextPosition.getX()][nextPosition.getY()].getObjectOnTile() != GameObject.WALL;
+    }
+
+    private void moveGameObject(Tile[][] board, GameObject gameObject, Position currentPosition, Position nextPosition) {
+        board[currentPosition.getX()][currentPosition.getY()].setObjectOnTile(GameObject.EMPTY);
+        board[nextPosition.getX()][nextPosition.getY()].setObjectOnTile(gameObject);
     }
 
     private Position findPacman(Tile[][] board) {

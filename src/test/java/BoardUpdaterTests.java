@@ -199,4 +199,56 @@ public class BoardUpdaterTests {
         int result = updater.getScore();
         assertEquals(1, result);
     }
+
+    @Test
+    public void Given_BoardWithPacmanAtMiddleAndWallInMiddleTop_When_PlayerSelectsUP_Then_PacmanStays() {
+        char[] row1 = {'.', 'W', '.'};
+        char[] row2 = {'.', 'P', '.'};
+        char[] row3 = {'.', '.', '.'};
+        char[][] boardAsChar = {row1, row2, row3};
+        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        BoardUpdater updater = new BoardUpdater();
+        Tile[][] result = updater.movePacman(startingBoard, Direction.UP);
+        Tile[][] expected = BoardFactory.createBoardFromChars(boardAsChar);
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void Given_BoardWithPacmanAtMiddleAndWallInMiddleBottom_When_PlayerSelectsDown_Then_PacmanStays() {
+        char[] row1 = {'.', '.', '.'};
+        char[] row2 = {'.', 'P', '.'};
+        char[] row3 = {'.', 'W', '.'};
+        char[][] boardAsChar = {row1, row2, row3};
+        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        BoardUpdater updater = new BoardUpdater();
+        Tile[][] result = updater.movePacman(startingBoard, Direction.DOWN);
+        Tile[][] expected = BoardFactory.createBoardFromChars(boardAsChar);
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void Given_BoardWithPacmanAtMiddleAndWallInMiddleLeft_When_PlayerSelectsLeft_Then_PacmanStays() {
+        char[] row1 = {'.', '.', '.'};
+        char[] row2 = {'W', 'P', '.'};
+        char[] row3 = {'.', '.', '.'};
+        char[][] boardAsChar = {row1, row2, row3};
+        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        BoardUpdater updater = new BoardUpdater();
+        Tile[][] result = updater.movePacman(startingBoard, Direction.LEFT);
+        Tile[][] expected = BoardFactory.createBoardFromChars(boardAsChar);
+        assertArrayEquals(expected, result);
+    }
+    @Test
+    public void Given_BoardWithPacmanAtMiddleAndWallInMiddleRight_When_PlayerSelectsRight_Then_PacmanStays() {
+        char[] row1 = {'.', '.', '.'};
+        char[] row2 = {'.', 'P', 'W'};
+        char[] row3 = {'.', '.', '.'};
+        char[][] boardAsChar = {row1, row2, row3};
+        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        BoardUpdater updater = new BoardUpdater();
+        Tile[][] result = updater.movePacman(startingBoard, Direction.RIGHT);
+        Tile[][] expected = BoardFactory.createBoardFromChars(boardAsChar);
+        assertArrayEquals(expected, result);
+    }
+
 }
