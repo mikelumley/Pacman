@@ -35,4 +35,16 @@ public class BoardFactoryTests {
 
         assertArrayEquals(expected, result);
     }
+
+    @Test
+    public void When_CreatingInitialBoard_Then_ReturnBoardOfFoodWithPacmanInMiddle() {
+        Tile[][] result = BoardFactory.initialiseBoard();
+        Tile[][] expected = {
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.PACMAN), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
+        };
+
+        assertArrayEquals(expected, result);
+    }
 }
