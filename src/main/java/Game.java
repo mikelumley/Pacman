@@ -8,12 +8,25 @@ public class Game {
     }
 
     public int play() {
-        while(true) {
-            updater.movePacman(this.board, Direction.UP);
+        while(!this.updater.isGameOver()) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Clear terminal
+            System.out.print("\033[H\033[2J");
+
+            this.updater.movePacman(this.board, Direction.UP);
+
+            System.out.println("Score: " + this.updater.getScore());
+            this.printBoard();
         }
+        return this.updater.getScore();
     }
 
-    public void printBoard() {
+    private void printBoard() {
         for(Tile[] row : this.board) {
             for(Tile tile : row) {
                 if (tile.getObjectOnTile() == GameObject.PACMAN)
