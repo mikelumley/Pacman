@@ -53,6 +53,22 @@ public class BoardFactoryTests {
     }
 
     @Test
+    public void Given_CharBoardWithMonsterMiddleTop_When_CreateTileBoard_Then_ReturnTileBoardWithMonsterMiddleTop() {
+        char[] row1 = {' ', 'M', ' '};
+        char[] row2 = {' ', 'P', ' '};
+        char[] row3 = {' ', ' ', ' '};
+        char[][] charBoard = {row1, row2, row3};
+        Tile[][] result = BoardFactory.createBoardFromChars(charBoard);
+        Tile[][] expected = {
+                {new Tile(GameObject.EMPTY), new Tile(GameObject.MONSTER), new Tile(GameObject.EMPTY)},
+                {new Tile(GameObject.EMPTY), new Tile(GameObject.PACMAN), new Tile(GameObject.EMPTY)},
+                {new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY)}
+        };
+
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
     public void When_CreatingInitialBoard_Then_ReturnBoardOfFoodWithPacmanInMiddle() {
         Tile[][] result = BoardFactory.initialiseBoard();
         Tile[][] expected = {

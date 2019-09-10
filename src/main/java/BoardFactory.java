@@ -21,6 +21,9 @@ public class BoardFactory {
                 else if (currentChar == 'W') {
                     board[i][j] = new Tile(GameObject.WALL);
                 }
+                else if (currentChar == 'M') {
+                    board[i][j] = new Tile(GameObject.MONSTER);
+                }
             }
         }
         return board;
