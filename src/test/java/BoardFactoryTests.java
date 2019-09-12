@@ -73,8 +73,8 @@ public class BoardFactoryTests {
         Tile[][] result = BoardFactory.initialiseBoard();
         Tile[][] expected = {
                 {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
-                {new Tile(GameObject.FOOD), new Tile(GameObject.PACMAN), new Tile(GameObject.FOOD)},
-                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
+                {new Tile(GameObject.WALL), new Tile(GameObject.PACMAN), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.MONSTER)}
         };
 
         assertArrayEquals(expected, result);
