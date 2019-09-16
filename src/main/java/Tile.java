@@ -1,9 +1,16 @@
 public class Tile {
 
     private GameObject objectOnTile;
+    private boolean foodOnTile = false;
 
     public Tile(GameObject objectOnTile) {
         this.objectOnTile = objectOnTile;
+        this.foodOnTile = false;
+    }
+
+    public Tile(GameObject objectOnTile, boolean foodOnTile) {
+        this.objectOnTile = objectOnTile;
+        this.foodOnTile = foodOnTile;
     }
 
     public GameObject getObjectOnTile() {
@@ -12,6 +19,14 @@ public class Tile {
 
     public void setObjectOnTile(GameObject objectOnTile) {
         this.objectOnTile = objectOnTile;
+    }
+
+    public boolean hasFood() {
+        return this.foodOnTile;
+    }
+
+    public void setFoodOnTile(boolean hasFood) {
+        this.foodOnTile = hasFood;
     }
 
     @Override

@@ -10,19 +10,19 @@ public class BoardFactory {
             for(int j = 0; j < numberOfCols; j++) {
                 char currentChar = boardAsChars[i][j];
                 if (currentChar == 'P') {
-                    board[i][j] = new Tile(GameObject.PACMAN);
+                    board[i][j] = new Tile(GameObject.PACMAN, false);
                 }
                 else if (currentChar == ' ') {
-                    board[i][j] = new Tile(GameObject.EMPTY);
+                    board[i][j] = new Tile(GameObject.EMPTY, false);
                 }
                 else if (currentChar == '.') {
-                    board[i][j] = new Tile(GameObject.FOOD);
+                    board[i][j] = new Tile(GameObject.EMPTY, true);
                 }
                 else if (currentChar == 'W') {
-                    board[i][j] = new Tile(GameObject.WALL);
+                    board[i][j] = new Tile(GameObject.WALL, false);
                 }
                 else if (currentChar == 'M') {
-                    board[i][j] = new Tile(GameObject.MONSTER);
+                    board[i][j] = new Tile(GameObject.MONSTER, true);
                 }
             }
         }
