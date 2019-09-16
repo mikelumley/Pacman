@@ -149,55 +149,30 @@ public class BoardUpdaterTests {
     }
 
     @Test
-    public void Given_BoardWithPacmanAtMiddle_When_PlayerSelectsUp_Then_PacmanMovesToMiddleTopAndEatsFood() {
+    public void Given_BoardWithPacmanAtMiddle_When_PacmanEats1Food_Then_ScoreIncreasesBy1() {
         char[] row1 = {'.', '.', '.'};
         char[] row2 = {'.', 'P', '.'};
         char[] row3 = {'.', '.', '.'};
         char[][] boardAsChar = {row1, row2, row3};
         Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         BoardUpdater updater = new BoardUpdater();
-        updater.movePacman(startingBoard, Direction.UP);
-        int result = updater.getScore();
+        Tile[][] board = updater.movePacman(startingBoard, Direction.UP);
+        int result = updater.calculateScore(board);
         assertEquals(1, result);
     }
 
     @Test
-    public void Given_BoardWithPacmanAtMiddle_When_PlayerSelectsDown_Then_PacmanMovesToMiddleBottomAndEatsFood() {
+    public void Given_BoardWithPacmanAtMiddle_When_PacmanEats2Food_Then_ScoreIncreasesBy2() {
         char[] row1 = {'.', '.', '.'};
         char[] row2 = {'.', 'P', '.'};
         char[] row3 = {'.', '.', '.'};
         char[][] boardAsChar = {row1, row2, row3};
         Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         BoardUpdater updater = new BoardUpdater();
-        updater.movePacman(startingBoard, Direction.DOWN);
-        int result = updater.getScore();
-        assertEquals(1, result);
-    }
-
-    @Test
-    public void Given_BoardWithPacmanAtMiddle_When_PlayerSelectsLeft_Then_PacmanMovesToMiddleLeftAndEatsFood() {
-        char[] row1 = {'.', '.', '.'};
-        char[] row2 = {'.', 'P', '.'};
-        char[] row3 = {'.', '.', '.'};
-        char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
-        updater.movePacman(startingBoard, Direction.LEFT);
-        int result = updater.getScore();
-        assertEquals(1, result);
-    }
-
-    @Test
-    public void Given_BoardWithPacmanAtMiddle_When_PlayerSelectsRight_Then_PacmanMovesToMiddleRightAndEatsFood() {
-        char[] row1 = {'.', '.', '.'};
-        char[] row2 = {'.', 'P', '.'};
-        char[] row3 = {'.', '.', '.'};
-        char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
-        updater.movePacman(startingBoard, Direction.RIGHT);
-        int result = updater.getScore();
-        assertEquals(1, result);
+        Tile[][] board = updater.movePacman(startingBoard, Direction.UP);
+        board = updater.movePacman(board, Direction.UP);
+        int result = updater.calculateScore(board);
+        assertEquals(2, result);
     }
 
     @Test
@@ -251,4 +226,98 @@ public class BoardUpdaterTests {
         assertArrayEquals(expected, result);
     }
 
+    @Test
+    public void Given_BoardWithMonsterAtMiddle_When_MonsterControllerSelectsUp_Then_MonsterMovesToMiddleTop() {
+        char[] row1 = {' ', ' ', ' '};
+        char[] row2 = {' ', 'M', ' '};
+        char[] row3 = {' ', ' ', ' '};
+        char[][] boardAsChar = {row1, row2, row3};
+        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        BoardUpdater updater = new BoardUpdater();
+        IMonsterController monsterController = new StubMonsterController(Direction.UP);
+        Tile[][] result = updater.moveMonsters(startingBoard, monsterController);
+
+        char[] expectedRow1 = {' ', 'M', ' '};
+        char[] expectedRow2 = {' ', ' ', ' '};
+        char[] expectedRow3 = {' ', ' ', ' '};
+        char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
+        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void Given_BoardWithMonsterAtMiddle_When_MonsterControllerSelectsDown_Then_MonsterMovesToMiddleBottom() {
+        char[] row1 = {' ', ' ', ' '};
+        char[] row2 = {' ', 'M', ' '};
+        char[] row3 = {' ', ' ', ' '};
+        char[][] boardAsChar = {row1, row2, row3};
+        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        BoardUpdater updater = new BoardUpdater();
+        IMonsterController monsterController = new StubMonsterController(Direction.DOWN);
+        Tile[][] result = updater.moveMonsters(startingBoard, monsterController);
+
+        char[] expectedRow1 = {' ', ' ', ' '};
+        char[] expectedRow2 = {' ', ' ', ' '};
+        char[] expectedRow3 = {' ', 'M', ' '};
+        char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
+        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void Given_BoardWithMonsterAtMiddle_When_MonsterControllerSelectsLeft_Then_MonsterMovesToMiddleLeft() {
+        char[] row1 = {' ', ' ', ' '};
+        char[] row2 = {' ', 'M', ' '};
+        char[] row3 = {' ', ' ', ' '};
+        char[][] boardAsChar = {row1, row2, row3};
+        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        BoardUpdater updater = new BoardUpdater();
+        IMonsterController monsterController = new StubMonsterController(Direction.LEFT);
+        Tile[][] result = updater.moveMonsters(startingBoard, monsterController);
+
+        char[] expectedRow1 = {' ', ' ', ' '};
+        char[] expectedRow2 = {'M', ' ', ' '};
+        char[] expectedRow3 = {' ', ' ', ' '};
+        char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
+        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void Given_BoardWithMonsterAtMiddle_When_MonsterControllerSelectsRight_Then_MonsterMovesToMiddleRight() {
+        char[] row1 = {' ', ' ', ' '};
+        char[] row2 = {' ', 'M', ' '};
+        char[] row3 = {' ', ' ', ' '};
+        char[][] boardAsChar = {row1, row2, row3};
+        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        BoardUpdater updater = new BoardUpdater();
+        IMonsterController monsterController = new StubMonsterController(Direction.RIGHT);
+        Tile[][] result = updater.moveMonsters(startingBoard, monsterController);
+
+        char[] expectedRow1 = {' ', ' ', ' '};
+        char[] expectedRow2 = {' ', ' ', 'M'};
+        char[] expectedRow3 = {' ', ' ', ' '};
+        char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
+        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void Given_BoardWithMonsterAtMiddle_When_MonsterMoves_Then_MonsterDoesNotEatFood() {
+        char[] row1 = {'.', '.', '.'};
+        char[] row2 = {'.', 'M', '.'};
+        char[] row3 = {'.', '.', '.'};
+        char[][] boardAsChar = {row1, row2, row3};
+        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        BoardUpdater updater = new BoardUpdater();
+        IMonsterController monsterController = new StubMonsterController(Direction.UP);
+        Tile[][] result = updater.moveMonsters(startingBoard, monsterController);
+
+        char[] expectedRow1 = {'.', 'M', '.'};
+        char[] expectedRow2 = {'.', '.', '.'};
+        char[] expectedRow3 = {'.', '.', '.'};
+        char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
+        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected, result);
+    }
 }

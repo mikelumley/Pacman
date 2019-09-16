@@ -18,12 +18,12 @@ public class Game {
             // Clear terminal
             System.out.print("\033[H\033[2J");
 
-            this.updater.movePacman(this.board, Direction.UP);
+            this.board = this.updater.movePacman(this.board, Direction.UP);
 
-            System.out.println("Score: " + this.updater.getScore());
+            System.out.println("Score: " + this.updater.calculateScore(board));
             this.printBoard();
         }
-        return this.updater.getScore();
+        return this.updater.calculateScore(board);
     }
 
     private void printBoard() {
@@ -31,8 +31,10 @@ public class Game {
             for(Tile tile : row) {
                 if (tile.getObjectOnTile() == GameObject.PACMAN)
                     System.out.print('P');
-                else if (tile.getObjectOnTile() == GameObject.FOOD)
+                else if (tile.hasFood())
                     System.out.print('.');
+                else if (tile.getObjectOnTile() == GameObject.WALL)
+                    System.out.print('W');
                 else
                     System.out.print(' ');
             }
