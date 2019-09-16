@@ -10,14 +10,13 @@ public class BoardFactoryTests {
         char[] row2 = {' ', 'P', ' '};
         char[] row3 = {' ', ' ', ' '};
         char[][] charBoard = {row1, row2, row3};
-        Tile[][] result = BoardFactory.createBoardFromChars(charBoard);
+        Board result = BoardFactory.createBoardFromChars(charBoard);
         Tile[][] expected = {
                 {new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY)},
                 {new Tile(GameObject.EMPTY), new Tile(GameObject.PACMAN), new Tile(GameObject.EMPTY)},
                 {new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY)}
         };
-
-        assertArrayEquals(expected, result);
+        assertArrayEquals(expected, result.getTiles());
     }
 
     @Test
@@ -26,14 +25,14 @@ public class BoardFactoryTests {
         char[] row2 = {'.', 'P', '.'};
         char[] row3 = {'.', '.', '.'};
         char[][] charBoard = {row1, row2, row3};
-        Tile[][] result = BoardFactory.createBoardFromChars(charBoard);
+        Board result = BoardFactory.createBoardFromChars(charBoard);
         Tile[][] expected = {
                 {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)},
                 {new Tile(GameObject.EMPTY, true), new Tile(GameObject.PACMAN), new Tile(GameObject.EMPTY, true)},
                 {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)}
         };
 
-        assertArrayEquals(expected, result);
+        assertArrayEquals(expected, result.getTiles());
     }
 
     @Test
@@ -42,14 +41,14 @@ public class BoardFactoryTests {
         char[] row2 = {' ', 'P', ' '};
         char[] row3 = {' ', ' ', ' '};
         char[][] charBoard = {row1, row2, row3};
-        Tile[][] result = BoardFactory.createBoardFromChars(charBoard);
+        Board result = BoardFactory.createBoardFromChars(charBoard);
         Tile[][] expected = {
                 {new Tile(GameObject.EMPTY), new Tile(GameObject.WALL), new Tile(GameObject.EMPTY)},
                 {new Tile(GameObject.EMPTY), new Tile(GameObject.PACMAN), new Tile(GameObject.EMPTY)},
                 {new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY)}
         };
 
-        assertArrayEquals(expected, result);
+        assertArrayEquals(expected, result.getTiles());
     }
 
     @Test
@@ -58,25 +57,25 @@ public class BoardFactoryTests {
         char[] row2 = {' ', 'P', ' '};
         char[] row3 = {' ', ' ', ' '};
         char[][] charBoard = {row1, row2, row3};
-        Tile[][] result = BoardFactory.createBoardFromChars(charBoard);
+        Board result = BoardFactory.createBoardFromChars(charBoard);
         Tile[][] expected = {
                 {new Tile(GameObject.EMPTY), new Tile(GameObject.MONSTER), new Tile(GameObject.EMPTY)},
                 {new Tile(GameObject.EMPTY), new Tile(GameObject.PACMAN), new Tile(GameObject.EMPTY)},
                 {new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY)}
         };
 
-        assertArrayEquals(expected, result);
+        assertArrayEquals(expected, result.getTiles());
     }
 
     @Test
     public void When_CreatingInitialBoard_Then_ReturnBoardOfFoodWithPacmanInMiddle() {
-        Tile[][] result = BoardFactory.initialiseBoard();
+        Board result = BoardFactory.initialiseBoard();
         Tile[][] expected = {
                 {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)},
                 {new Tile(GameObject.WALL), new Tile(GameObject.PACMAN), new Tile(GameObject.EMPTY, true)},
                 {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.MONSTER)}
         };
 
-        assertArrayEquals(expected, result);
+        assertArrayEquals(expected, result.getTiles());
     }
 }

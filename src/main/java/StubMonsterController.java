@@ -7,7 +7,7 @@ public class StubMonsterController implements IMonsterController {
     }
 
     @Override
-    public Direction getNextDirection(Tile[][] board, Position currentPosition) {
+    public Direction getNextDirection(Board board, Position currentPosition) {
         return this.directionToReturn;
     }
 }

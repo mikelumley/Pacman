@@ -1,35 +1,35 @@
 public class BoardFactory {
 
-    public static Tile[][] createBoardFromChars(char[][] boardAsChars) {
+    public static Board createBoardFromChars(char[][] boardAsChars) {
         // TODO: 2019-09-09 Add validation
         int numberOfRows = boardAsChars.length;
         int numberOfCols = boardAsChars[0].length;
-        Tile[][] board = new Tile[numberOfRows][numberOfCols];
+        Tile[][] tiles = new Tile[numberOfRows][numberOfCols];
 
         for(int i = 0; i < numberOfRows; i++) {
             for(int j = 0; j < numberOfCols; j++) {
                 char currentChar = boardAsChars[i][j];
                 if (currentChar == 'P') {
-                    board[i][j] = new Tile(GameObject.PACMAN, false);
+                    tiles[i][j] = new Tile(GameObject.PACMAN, false);
                 }
                 else if (currentChar == ' ') {
-                    board[i][j] = new Tile(GameObject.EMPTY, false);
+                    tiles[i][j] = new Tile(GameObject.EMPTY, false);
                 }
                 else if (currentChar == '.') {
-                    board[i][j] = new Tile(GameObject.EMPTY, true);
+                    tiles[i][j] = new Tile(GameObject.EMPTY, true);
                 }
                 else if (currentChar == 'W') {
-                    board[i][j] = new Tile(GameObject.WALL, false);
+                    tiles[i][j] = new Tile(GameObject.WALL, false);
                 }
                 else if (currentChar == 'M') {
-                    board[i][j] = new Tile(GameObject.MONSTER, true);
+                    tiles[i][j] = new Tile(GameObject.MONSTER, true);
                 }
             }
         }
-        return board;
+        return new Board(tiles);
     }
 
-    public static Tile[][] initialiseBoard() {
+    public static Board initialiseBoard() {
         char[] row1 = {'.', '.', '.'};
         char[] row2 = {'W', 'P', '.'};
         char[] row3 = {'.', '.', 'M'};

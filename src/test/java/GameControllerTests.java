@@ -2,7 +2,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class BoardUpdaterTests {
+public class GameControllerTests {
 
     @Test
     public void Given_BoardWithPacmanAtMiddle_When_PlayerSelectsUp_Then_PacmanMovesUp() {
@@ -10,16 +10,16 @@ public class BoardUpdaterTests {
         char[] row2 = {' ', 'P', ' '};
         char[] row3 = {' ', ' ', ' '};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
-        Tile[][] result = updater.movePacman(startingBoard, Direction.UP);
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        Board result = updater.movePacman(startingBoard, Direction.UP);
 
         char[] expectedRow1 = {' ', 'P', ' '};
         char[] expectedRow2 = {' ', ' ', ' '};
         char[] expectedRow3 = {' ', ' ', ' '};
         char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
-        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
-        assertArrayEquals(expected, result);
+        Board expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
 
     @Test
@@ -28,16 +28,16 @@ public class BoardUpdaterTests {
         char[] row2 = {' ', 'P', ' '};
         char[] row3 = {' ', ' ', ' '};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
-        Tile[][] result = updater.movePacman(startingBoard, Direction.DOWN);
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        Board result = updater.movePacman(startingBoard, Direction.DOWN);
 
         char[] expectedRow1 = {' ', ' ', ' '};
         char[] expectedRow2 = {' ', ' ', ' '};
         char[] expectedRow3 = {' ', 'P', ' '};
         char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
-        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
-        assertArrayEquals(expected, result);
+        Board expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
 
     @Test
@@ -46,16 +46,16 @@ public class BoardUpdaterTests {
         char[] row2 = {' ', 'P', ' '};
         char[] row3 = {' ', ' ', ' '};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
-        Tile[][] result = updater.movePacman(startingBoard, Direction.LEFT);
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        Board result = updater.movePacman(startingBoard, Direction.LEFT);
 
         char[] expectedRow1 = {' ', ' ', ' '};
         char[] expectedRow2 = {'P', ' ', ' '};
         char[] expectedRow3 = {' ', ' ', ' '};
         char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
-        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
-        assertArrayEquals(expected, result);
+        Board expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
 
     @Test
@@ -64,16 +64,16 @@ public class BoardUpdaterTests {
         char[] row2 = {' ', 'P', ' '};
         char[] row3 = {' ', ' ', ' '};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
-        Tile[][] result = updater.movePacman(startingBoard, Direction.RIGHT);
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        Board result = updater.movePacman(startingBoard, Direction.RIGHT);
 
         char[] expectedRow1 = {' ', ' ', ' '};
         char[] expectedRow2 = {' ', ' ', 'P'};
         char[] expectedRow3 = {' ', ' ', ' '};
         char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
-        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
-        assertArrayEquals(expected, result);
+        Board expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
 
     @Test
@@ -82,16 +82,16 @@ public class BoardUpdaterTests {
         char[] row2 = {' ', ' ', ' '};
         char[] row3 = {' ', ' ', ' '};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
-        Tile[][] result = updater.movePacman(startingBoard, Direction.UP);
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        Board result = updater.movePacman(startingBoard, Direction.UP);
 
         char[] expectedRow1 = {' ', ' ', ' '};
         char[] expectedRow2 = {' ', ' ', ' '};
         char[] expectedRow3 = {' ', 'P', ' '};
         char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
-        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
-        assertArrayEquals(expected, result);
+        Board expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
 
     @Test
@@ -100,16 +100,16 @@ public class BoardUpdaterTests {
         char[] row2 = {' ', ' ', ' '};
         char[] row3 = {' ', 'P', ' '};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
-        Tile[][] result = updater.movePacman(startingBoard, Direction.DOWN);
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        Board result = updater.movePacman(startingBoard, Direction.DOWN);
 
         char[] expectedRow1 = {' ', 'P', ' '};
         char[] expectedRow2 = {' ', ' ', ' '};
         char[] expectedRow3 = {' ', ' ', ' '};
         char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
-        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
-        assertArrayEquals(expected, result);
+        Board expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
 
     @Test
@@ -118,16 +118,16 @@ public class BoardUpdaterTests {
         char[] row2 = {'P', ' ', ' '};
         char[] row3 = {' ', ' ', ' '};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
-        Tile[][] result = updater.movePacman(startingBoard, Direction.LEFT);
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        Board result = updater.movePacman(startingBoard, Direction.LEFT);
 
         char[] expectedRow1 = {' ', ' ', ' '};
         char[] expectedRow2 = {' ', ' ', 'P'};
         char[] expectedRow3 = {' ', ' ', ' '};
         char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
-        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
-        assertArrayEquals(expected, result);
+        Board expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
 
     @Test
@@ -136,16 +136,16 @@ public class BoardUpdaterTests {
         char[] row2 = {' ', ' ', 'P'};
         char[] row3 = {' ', ' ', ' '};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
-        Tile[][] result = updater.movePacman(startingBoard, Direction.RIGHT);
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        Board result = updater.movePacman(startingBoard, Direction.RIGHT);
 
         char[] expectedRow1 = {' ', ' ', ' '};
         char[] expectedRow2 = {'P', ' ', ' '};
         char[] expectedRow3 = {' ', ' ', ' '};
         char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
-        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
-        assertArrayEquals(expected, result);
+        Board expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
 
     @Test
@@ -154,10 +154,10 @@ public class BoardUpdaterTests {
         char[] row2 = {'.', 'P', '.'};
         char[] row3 = {'.', '.', '.'};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
-        Tile[][] board = updater.movePacman(startingBoard, Direction.UP);
-        int result = updater.calculateScore(board);
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        Board board = updater.movePacman(startingBoard, Direction.UP);
+        int result = board.calculateScore();
         assertEquals(1, result);
     }
 
@@ -167,11 +167,11 @@ public class BoardUpdaterTests {
         char[] row2 = {'.', 'P', '.'};
         char[] row3 = {'.', '.', '.'};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
-        Tile[][] board = updater.movePacman(startingBoard, Direction.UP);
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        Board board = updater.movePacman(startingBoard, Direction.UP);
         board = updater.movePacman(board, Direction.UP);
-        int result = updater.calculateScore(board);
+        int result = board.calculateScore();
         assertEquals(2, result);
     }
 
@@ -181,11 +181,11 @@ public class BoardUpdaterTests {
         char[] row2 = {'.', 'P', '.'};
         char[] row3 = {'.', '.', '.'};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
-        Tile[][] result = updater.movePacman(startingBoard, Direction.UP);
-        Tile[][] expected = BoardFactory.createBoardFromChars(boardAsChar);
-        assertArrayEquals(expected, result);
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        Board result = updater.movePacman(startingBoard, Direction.UP);
+        Board expected = BoardFactory.createBoardFromChars(boardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
 
     @Test
@@ -194,11 +194,11 @@ public class BoardUpdaterTests {
         char[] row2 = {'.', 'P', '.'};
         char[] row3 = {'.', 'W', '.'};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
-        Tile[][] result = updater.movePacman(startingBoard, Direction.DOWN);
-        Tile[][] expected = BoardFactory.createBoardFromChars(boardAsChar);
-        assertArrayEquals(expected, result);
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        Board result = updater.movePacman(startingBoard, Direction.DOWN);
+        Board expected = BoardFactory.createBoardFromChars(boardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
 
     @Test
@@ -207,11 +207,11 @@ public class BoardUpdaterTests {
         char[] row2 = {'W', 'P', '.'};
         char[] row3 = {'.', '.', '.'};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
-        Tile[][] result = updater.movePacman(startingBoard, Direction.LEFT);
-        Tile[][] expected = BoardFactory.createBoardFromChars(boardAsChar);
-        assertArrayEquals(expected, result);
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        Board result = updater.movePacman(startingBoard, Direction.LEFT);
+        Board expected = BoardFactory.createBoardFromChars(boardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
     @Test
     public void Given_BoardWithPacmanAtMiddleAndWallInMiddleRight_When_PlayerSelectsRight_Then_PacmanStays() {
@@ -219,11 +219,11 @@ public class BoardUpdaterTests {
         char[] row2 = {'.', 'P', 'W'};
         char[] row3 = {'.', '.', '.'};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
-        Tile[][] result = updater.movePacman(startingBoard, Direction.RIGHT);
-        Tile[][] expected = BoardFactory.createBoardFromChars(boardAsChar);
-        assertArrayEquals(expected, result);
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        Board result = updater.movePacman(startingBoard, Direction.RIGHT);
+        Board expected = BoardFactory.createBoardFromChars(boardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
 
     @Test
@@ -232,17 +232,17 @@ public class BoardUpdaterTests {
         char[] row2 = {' ', 'M', ' '};
         char[] row3 = {' ', ' ', ' '};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
         IMonsterController monsterController = new StubMonsterController(Direction.UP);
-        Tile[][] result = updater.moveMonsters(startingBoard, monsterController);
+        Board result = updater.moveMonsters(startingBoard, monsterController);
 
         char[] expectedRow1 = {' ', 'M', ' '};
         char[] expectedRow2 = {' ', ' ', ' '};
         char[] expectedRow3 = {' ', ' ', ' '};
         char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
-        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
-        assertArrayEquals(expected, result);
+        Board expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
 
     @Test
@@ -251,17 +251,17 @@ public class BoardUpdaterTests {
         char[] row2 = {' ', 'M', ' '};
         char[] row3 = {' ', ' ', ' '};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
         IMonsterController monsterController = new StubMonsterController(Direction.DOWN);
-        Tile[][] result = updater.moveMonsters(startingBoard, monsterController);
+        Board result = updater.moveMonsters(startingBoard, monsterController);
 
         char[] expectedRow1 = {' ', ' ', ' '};
         char[] expectedRow2 = {' ', ' ', ' '};
         char[] expectedRow3 = {' ', 'M', ' '};
         char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
-        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
-        assertArrayEquals(expected, result);
+        Board expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
 
     @Test
@@ -270,17 +270,17 @@ public class BoardUpdaterTests {
         char[] row2 = {' ', 'M', ' '};
         char[] row3 = {' ', ' ', ' '};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
         IMonsterController monsterController = new StubMonsterController(Direction.LEFT);
-        Tile[][] result = updater.moveMonsters(startingBoard, monsterController);
+        Board result = updater.moveMonsters(startingBoard, monsterController);
 
         char[] expectedRow1 = {' ', ' ', ' '};
         char[] expectedRow2 = {'M', ' ', ' '};
         char[] expectedRow3 = {' ', ' ', ' '};
         char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
-        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
-        assertArrayEquals(expected, result);
+        Board expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
 
     @Test
@@ -289,17 +289,17 @@ public class BoardUpdaterTests {
         char[] row2 = {' ', 'M', ' '};
         char[] row3 = {' ', ' ', ' '};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
         IMonsterController monsterController = new StubMonsterController(Direction.RIGHT);
-        Tile[][] result = updater.moveMonsters(startingBoard, monsterController);
+        Board result = updater.moveMonsters(startingBoard, monsterController);
 
         char[] expectedRow1 = {' ', ' ', ' '};
         char[] expectedRow2 = {' ', ' ', 'M'};
         char[] expectedRow3 = {' ', ' ', ' '};
         char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
-        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
-        assertArrayEquals(expected, result);
+        Board expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
 
     @Test
@@ -308,16 +308,16 @@ public class BoardUpdaterTests {
         char[] row2 = {'.', 'M', '.'};
         char[] row3 = {'.', '.', '.'};
         char[][] boardAsChar = {row1, row2, row3};
-        Tile[][] startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        BoardUpdater updater = new BoardUpdater();
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
         IMonsterController monsterController = new StubMonsterController(Direction.UP);
-        Tile[][] result = updater.moveMonsters(startingBoard, monsterController);
+        Board result = updater.moveMonsters(startingBoard, monsterController);
 
         char[] expectedRow1 = {'.', 'M', '.'};
         char[] expectedRow2 = {'.', '.', '.'};
         char[] expectedRow3 = {'.', '.', '.'};
         char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
-        Tile[][] expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
-        assertArrayEquals(expected, result);
+        Board expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
     }
 }

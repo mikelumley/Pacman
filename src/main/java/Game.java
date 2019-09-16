@@ -1,7 +1,7 @@
 public class Game {
 
-    private BoardUpdater updater = new BoardUpdater();
-    private Tile[][] board;
+    private GameController updater = new GameController();
+    private Board board;
 
     public Game() {
         this.board = BoardFactory.initialiseBoard();
@@ -20,14 +20,14 @@ public class Game {
 
             this.board = this.updater.movePacman(this.board, Direction.UP);
 
-            System.out.println("Score: " + this.updater.calculateScore(board));
+            System.out.println("Score: " + this.board.calculateScore());
             this.printBoard();
         }
-        return this.updater.calculateScore(board);
+        return this.board.calculateScore();
     }
 
     private void printBoard() {
-        for(Tile[] row : this.board) {
+        for(Tile[] row : this.board.getTiles()) {
             for(Tile tile : row) {
                 if (tile.getObjectOnTile() == GameObject.PACMAN)
                     System.out.print('P');
