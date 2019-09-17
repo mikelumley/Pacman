@@ -1,8 +1,9 @@
 public class Main {
     public static void main(String[] args) {
-        ConsoleInputService inputService = new ConsoleInputService();
+        IInputService inputService = new ConsoleInputService();
+        IMonsterController monsterController = new RandomMonsterController();
 
-        Game game = new Game(inputService);
+        Game game = new Game(inputService, monsterController);
         int score = game.play();
 
         System.out.println("You won!");

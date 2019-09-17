@@ -2,11 +2,13 @@ public class Game {
 
     private IGameController gameController = new GameController();
     private Board board;
-    private ConsoleInputService inputService;
+    private IInputService inputService;
+    private IMonsterController monsterController;
 
-    public Game(ConsoleInputService inputService) {
+    public Game(IInputService inputService, IMonsterController monsterController) {
         this.board = BoardFactory.initialiseBoard();
         this.inputService = inputService;
+        this.monsterController = monsterController;
     }
 
     public int play() {
@@ -21,12 +23,14 @@ public class Game {
             // TODO: 2019-09-16 Move to output service
             System.out.print("\033[H\033[2J");
 
-            this.board = this.gameController.movePacman(this.board, this.inputService.getDirection());
+            this.board = this.gameController.movePacman(this.board, this.inputService.getUserInputDirection());
+            this.board = this.gameController.moveMonsters(this.board, this.monsterController);
 
             System.out.print("Score: " + this.board.calculateScore() + "\r\n");
             this.printBoard();
         }
-        this.inputService.setConsoleToCookedMode();
+        // TODO: 2019-09-17 Better way to do this?
+        ((ConsoleInputService)this.inputService).setConsoleToCookedMode();
         return this.board.calculateScore();
     }
 

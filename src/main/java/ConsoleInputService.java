@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class ConsoleInputService {
+public class ConsoleInputService implements IInputService{
     private InputStreamReader consoleInputStream = new InputStreamReader(System.in);
     private BufferedReader bufferedConsoleInputReader = new BufferedReader(consoleInputStream);
 
@@ -16,7 +16,8 @@ public class ConsoleInputService {
         }
     }
 
-    public Direction getDirection() {
+    @Override
+    public Direction getUserInputDirection() {
         int characterCode = 0;
         try {
             if (bufferedConsoleInputReader.ready())
