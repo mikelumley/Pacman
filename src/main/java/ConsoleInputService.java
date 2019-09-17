@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 public class ConsoleInputService {
     private InputStreamReader consoleInputStream = new InputStreamReader(System.in);
     private BufferedReader bufferedConsoleInputReader = new BufferedReader(consoleInputStream);
-    private Direction pacmanDirection = Direction.UP;
 
     public ConsoleInputService() {
         try {
@@ -18,34 +17,31 @@ public class ConsoleInputService {
     }
 
     public Direction getDirection() {
-        int characterCodeCode = 0;
+        int characterCode = 0;
         try {
             if (bufferedConsoleInputReader.ready())
-                characterCodeCode = bufferedConsoleInputReader.read();
+                characterCode = bufferedConsoleInputReader.read();
         } catch (IOException e) {
             System.err.println("Error: Unable to read input from console");
             e.printStackTrace();
         }
 
-        switch (characterCodeCode) {
+        switch (characterCode) {
             case 3 :
                 this.setConsoleToCookedMode();
                 System.out.print("Exiting\r\n");
                 System.exit(0);
             case 119 :
-                this.pacmanDirection = Direction.UP;
-                break;
+                return Direction.UP;
             case 115 :
-                this.pacmanDirection = Direction.DOWN;
-                break;
+                return Direction.DOWN;
             case 97 :
-                this.pacmanDirection = Direction.LEFT;
-                break;
+                return Direction.LEFT;
             case 100 :
-                this.pacmanDirection = Direction.RIGHT;
-                break;
+                return Direction.RIGHT;
+            default :
+                return null;
         }
-        return this.pacmanDirection;
     }
 
     public void setConsoleToCookedMode() {

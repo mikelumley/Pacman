@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Position {
     private int x;
     private int y;
@@ -13,5 +15,16 @@ public class Position {
 
     public int getY() {
         return this.y;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Position position = (Position) obj;
+        return x == position.x &&
+                y == position.y;
     }
 }

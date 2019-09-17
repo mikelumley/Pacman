@@ -2,15 +2,20 @@ import java.util.ArrayList;
 
 public class GameController implements IGameController {
 
-    public boolean isGameOver() {
-        return false;
+    private Direction pacmanDirection = Direction.UP;
+
+    @Override
+    public boolean isGameOver(Board board) {
+        return board.calculateScore() == 7;
     }
 
     @Override
-    public Board movePacman(Board board, Direction direction) {
+    public Board movePacman(Board board, Direction userInputDirection) {
         Position currentPosition = board.findPacman();
-        Position nextPosition = this.calculateNextPosition(board, currentPosition, direction);
-        board.moveGameObject(GameObject.PACMAN, currentPosition, nextPosition);
+        if (userInputDirection != null)
+            this.pacmanDirection = userInputDirection;
+        Position nextPosition = this.calculateNextPosition(board, currentPosition, this.pacmanDirection);
+        this.moveGameObject(board, GameObject.PACMAN, currentPosition, nextPosition);
         return board;
     }
 
@@ -19,9 +24,9 @@ public class GameController implements IGameController {
         ArrayList<Position> monsterPositions = board.findMonsters();
 
         for(Position currentPosition : monsterPositions) {
-            Direction direction = monsterController.getNextDirection(board, currentPosition);
-            Position nextPosition = this.calculateNextPosition(board, currentPosition, direction);
-            board.moveGameObject(GameObject.MONSTER, currentPosition, nextPosition);
+            Direction monsterDirection = monsterController.getNextDirection(board, currentPosition);
+            Position nextPosition = this.calculateNextPosition(board, currentPosition, monsterDirection);
+            this.moveGameObject(board, GameObject.MONSTER, currentPosition, nextPosition);
         }
         return board;
     }
@@ -49,5 +54,17 @@ public class GameController implements IGameController {
                 break;
         }
         return new Position(nextXPosition, nextYPosition);
+    }
+
+    private void moveGameObject(Board board, GameObject gameObject, Position currentPosition, Position nextPosition) {
+        Tile currentTile = board.getTile(currentPosition);
+        Tile nextTile = board.getTile(nextPosition);
+
+        if (nextTile.getObjectOnTile() != GameObject.WALL) {
+            currentTile.setObjectOnTile(GameObject.EMPTY);
+            nextTile.setObjectOnTile(gameObject);
+            if (gameObject == GameObject.PACMAN)
+                currentTile.setFoodOnTile(false);
+        }
     }
 }

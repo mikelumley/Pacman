@@ -15,6 +15,10 @@ public class Board {
         return this.tiles;
     }
 
+    public Tile getTile(Position position) {
+        return this.tiles[position.getX()][position.getY()];
+    }
+
     public int getNumberOfRows() {
         return this.numberOfRows;
     }
@@ -60,14 +64,4 @@ public class Board {
         }
         return score;
     }
-
-    public void moveGameObject(GameObject gameObject, Position currentPosition, Position nextPosition) {
-        if (this.tiles[nextPosition.getX()][nextPosition.getY()].getObjectOnTile() != GameObject.WALL) {
-            this.tiles[currentPosition.getX()][currentPosition.getY()].setObjectOnTile(GameObject.EMPTY);
-            this.tiles[nextPosition.getX()][nextPosition.getY()].setObjectOnTile(gameObject);
-            if (gameObject == GameObject.PACMAN)
-                this.tiles[currentPosition.getX()][currentPosition.getY()].setFoodOnTile(false);
-        }
-    }
-
 }

@@ -149,33 +149,6 @@ public class GameControllerTests {
     }
 
     @Test
-    public void Given_BoardWithPacmanAtMiddle_When_PacmanEats1Food_Then_ScoreIncreasesBy1() {
-        char[] row1 = {'.', '.', '.'};
-        char[] row2 = {'.', 'P', '.'};
-        char[] row3 = {'.', '.', '.'};
-        char[][] boardAsChar = {row1, row2, row3};
-        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        GameController updater = new GameController();
-        Board board = updater.movePacman(startingBoard, Direction.UP);
-        int result = board.calculateScore();
-        assertEquals(1, result);
-    }
-
-    @Test
-    public void Given_BoardWithPacmanAtMiddle_When_PacmanEats2Food_Then_ScoreIncreasesBy2() {
-        char[] row1 = {'.', '.', '.'};
-        char[] row2 = {'.', 'P', '.'};
-        char[] row3 = {'.', '.', '.'};
-        char[][] boardAsChar = {row1, row2, row3};
-        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
-        GameController updater = new GameController();
-        Board board = updater.movePacman(startingBoard, Direction.UP);
-        board = updater.movePacman(board, Direction.UP);
-        int result = board.calculateScore();
-        assertEquals(2, result);
-    }
-
-    @Test
     public void Given_BoardWithPacmanAtMiddleAndWallInMiddleTop_When_PlayerSelectsUP_Then_PacmanStays() {
         char[] row1 = {'.', 'W', '.'};
         char[] row2 = {'.', 'P', '.'};
