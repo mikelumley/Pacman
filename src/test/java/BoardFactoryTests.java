@@ -70,10 +70,17 @@ public class BoardFactoryTests {
     @Test
     public void When_CreatingInitialBoard_Then_ReturnBoardOfFoodWithPacmanInMiddle() {
         Board result = BoardFactory.initialiseBoard();
+        Tile food = new Tile(GameObject.EMPTY, true);
+        Tile pacman = new Tile(GameObject.PACMAN,false);
+        Tile monster = new Tile(GameObject.MONSTER, true);
+        Tile wall = new Tile(GameObject.WALL, false);
+
         Tile[][] expected = {
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.WALL), new Tile(GameObject.PACMAN), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.MONSTER)}
+                {wall, food, food, food, food, wall, food},
+                {wall, monster, food, pacman, food, food, food},
+                {food, food, monster, food, food, wall, food},
+                {food, food, wall, food, food, wall, food},
+                {food, food, wall, food, food, food, food},
         };
 
         assertArrayEquals(expected, result.getTiles());
