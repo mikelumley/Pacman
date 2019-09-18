@@ -293,4 +293,80 @@ public class GameControllerTests {
         Board expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
         assertArrayEquals(expected.getTiles(), result.getTiles());
     }
+
+    @Test
+    public void Given_BoardWith2Monsters_When_MonsterMovesOntoOtherMonster_Then_MonsterStays() {
+        char[] row1 = {'.', '.', '.'};
+        char[] row2 = {'W', 'M', 'M'};
+        char[] row3 = {'.', '.', '.'};
+        char[][] boardAsChar = {row1, row2, row3};
+        Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        IMonsterController monsterController = new StubMonsterController(Direction.LEFT);
+        Board result = updater.moveMonsters(startingBoard, monsterController);
+
+        char[] expectedRow1 = {'.', '.', '.'};
+        char[] expectedRow2 = {'W', 'M', 'M'};
+        char[] expectedRow3 = {'.', '.', '.'};
+        char[][] expectedBoardAsChar = {expectedRow1, expectedRow2, expectedRow3};
+        Board expected = BoardFactory.createBoardFromChars(expectedBoardAsChar);
+        assertArrayEquals(expected.getTiles(), result.getTiles());
+    }
+
+    @Test
+    public void Given_BoardWithFoodLeft_When_CheckingIfGameOver_Then_ReturnFalse() {
+        char[] row1 = {'.', '.', '.'};
+        char[] row2 = {'.', 'P', '.'};
+        char[] row3 = {'.', '.', '.'};
+        char[][] boardAsChar = {row1, row2, row3};
+        Board board = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        assertFalse(updater.isGameOver(board));
+    }
+
+    @Test
+    public void Given_BoardWithNoFoodLeft_When_CheckingIfGameOver_Then_ReturnTrue() {
+        char[] row1 = {' ', ' ', ' '};
+        char[] row2 = {' ', 'P', ' '};
+        char[] row3 = {' ', ' ', ' '};
+        char[][] boardAsChar = {row1, row2, row3};
+        Board board = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        assertTrue(updater.isGameOver(board));
+    }
+
+    @Test
+    public void Given_BoardWithNoFoodLeftAndMonster_When_CheckingIfGameOver_Then_ReturnTrue() {
+        char[] row1 = {' ', ' ', ' '};
+        char[] row2 = {' ', 'P', ' '};
+        char[] row3 = {' ', ' ', 'M'};
+        char[][] boardAsChar = {row1, row2, row3};
+        Board board = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        assertTrue(updater.isGameOver(board));
+    }
+
+    @Test
+    public void Given_BoardWithFoodAndMonsterAtePacman_When_CheckingIfGameOver_Then_ReturnTrue() {
+        char[] row1 = {' ', ' ', ' '};
+        char[] row2 = {' ', 'P', 'M'};
+        char[] row3 = {' ', '.', ' '};
+        char[][] boardAsChar = {row1, row2, row3};
+        Board board = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        board = updater.moveMonsters(board, new StubMonsterController(Direction.LEFT));
+        assertTrue(updater.isGameOver(board));
+    }
+
+    @Test
+    public void Given_BoardWithFoodAndPacmanMoveOntoMonster_When_CheckingIfGameOver_Then_ReturnTrue() {
+        char[] row1 = {' ', ' ', ' '};
+        char[] row2 = {' ', 'P', 'M'};
+        char[] row3 = {' ', '.', ' '};
+        char[][] boardAsChar = {row1, row2, row3};
+        Board board = BoardFactory.createBoardFromChars(boardAsChar);
+        GameController updater = new GameController();
+        board = updater.movePacman(board, Direction.RIGHT);
+        assertTrue(updater.isGameOver(board));
+    }
 }

@@ -36,7 +36,7 @@ public class Board {
                 }
             }
         }
-        throw new RuntimeException("Error: Pacman doesn't exist");
+        return null;
     }
 
     public ArrayList<Position> findMonsters() {
@@ -51,6 +51,20 @@ public class Board {
             }
         }
         return monsterPositions;
+    }
+
+    public int findFoodRemaining() {
+        int food = 0;
+
+        for(int i = 0; i < this.tiles.length; i++) {
+            for(int j = 0; j < this.tiles[0].length; j++) {
+                Tile tile = this.tiles[i][j];
+                if (tile.getObjectOnTile() == GameObject.EMPTY && tile.hasFood()) {
+                    food++;
+                }
+            }
+        }
+        return food;
     }
 
     public int calculateScore() {

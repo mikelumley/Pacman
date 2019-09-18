@@ -3,10 +3,12 @@ import java.util.ArrayList;
 public class GameController implements IGameController {
 
     private Direction pacmanDirection = Direction.UP;
+    private boolean pacmanDead = false;
 
     @Override
     public boolean isGameOver(Board board) {
-        return board.calculateScore() == 7;
+        int foodRemaining = board.findFoodRemaining();
+        return foodRemaining == 0 || board.findPacman() == null;
     }
 
     @Override
@@ -60,11 +62,19 @@ public class GameController implements IGameController {
         Tile currentTile = board.getTile(currentPosition);
         Tile nextTile = board.getTile(nextPosition);
 
-        if (nextTile.getObjectOnTile() != GameObject.WALL) {
+        if (this.canMoveOntoTile(gameObject, nextTile)) {
             currentTile.setObjectOnTile(GameObject.EMPTY);
-            nextTile.setObjectOnTile(gameObject);
             if (gameObject == GameObject.PACMAN)
                 currentTile.setFoodOnTile(false);
+            if (nextTile.getObjectOnTile() != GameObject.MONSTER)
+                nextTile.setObjectOnTile(gameObject);
         }
+    }
+
+    private boolean canMoveOntoTile(GameObject gameObject, Tile nextTile) {
+        boolean isNextTileWall = nextTile.getObjectOnTile() == GameObject.WALL;
+        boolean isMonster = gameObject == GameObject.MONSTER;
+        boolean isNextTileMonster = nextTile.getObjectOnTile() == GameObject.MONSTER;
+        return !(isNextTileWall || (isMonster && isNextTileMonster));
     }
 }

@@ -18,7 +18,7 @@ public class BoardTests {
         assertEquals(expected, result);
     }
 
-    @Test (expected = RuntimeException.class)
+    @Test
     public void Given_BoardWithNoPacman_When_FindingPacman_Then_ThrowExpection() {
         char[] row1 = {'.', '.', '.'};
         char[] row2 = {'.', '.', '.'};
@@ -26,7 +26,7 @@ public class BoardTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board board = BoardFactory.createBoardFromChars(boardAsChar);
         Position result = board.findPacman();
-        Position expected = new Position(1,1);
+        Position expected = null;
         assertEquals(expected, result);
     }
 
