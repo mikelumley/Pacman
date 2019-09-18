@@ -13,7 +13,7 @@ public class ConsoleOutputService implements IOutputService {
                 else if (tile.getObjectOnTile() == GameObject.EMPTY && tile.hasFood())
                     System.out.print('.');
                 else if (tile.getObjectOnTile() == GameObject.WALL)
-                    System.out.print('-');
+                    System.out.print('=');
                 else if (tile.getObjectOnTile() == GameObject.MONSTER)
                     System.out.print('M');
                 else
