@@ -32,7 +32,7 @@ public class BoardFactory {
     public static Board initialiseBoard() {
         char[] row1 = {'W', '.', '.', '.', '.', 'W', '.'};
         char[] row2 = {'W', 'M', '.', 'P', '.', '.', '.'};
-        char[] row3 = {'.', '.', 'M', '.', '.', 'W', '.'};
+        char[] row3 = {'.', '.', 'W', '.', '.', 'W', '.'};
         char[] row4 = {'.', '.', 'W', '.', '.', 'W', '.'};
         char[] row5 = {'.', '.', 'W', '.', '.', '.', '.'};
         char[][] boardAsChar = {row1, row2, row3, row4, row5};

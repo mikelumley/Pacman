@@ -78,7 +78,7 @@ public class BoardFactoryTests {
         Tile[][] expected = {
                 {wall, food, food, food, food, wall, food},
                 {wall, monster, food, pacman, food, food, food},
-                {food, food, monster, food, food, wall, food},
+                {food, food, wall, food, food, wall, food},
                 {food, food, wall, food, food, wall, food},
                 {food, food, wall, food, food, food, food},
         };
