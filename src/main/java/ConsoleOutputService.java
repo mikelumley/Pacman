@@ -9,11 +9,11 @@ public class ConsoleOutputService implements IOutputService {
         for(Tile[] row : board.getTiles()) {
             for(Tile tile : row) {
                 if (tile.getObjectOnTile() == GameObject.PACMAN)
-                    System.out.print('P');
+                    System.out.print(this.getPacmanSymbol(board.getPacmanDirection()));
                 else if (tile.getObjectOnTile() == GameObject.EMPTY && tile.hasFood())
                     System.out.print('.');
                 else if (tile.getObjectOnTile() == GameObject.WALL)
-                    System.out.print('W');
+                    System.out.print('-');
                 else if (tile.getObjectOnTile() == GameObject.MONSTER)
                     System.out.print('M');
                 else
@@ -22,5 +22,19 @@ public class ConsoleOutputService implements IOutputService {
             System.out.print("\r\n");
         }
         System.out.print("\r\n");
+    }
+
+    private char getPacmanSymbol(Direction pacmanDirection) {
+        switch (pacmanDirection) {
+            default:
+            case UP :
+                return 'v';
+            case DOWN :
+                return '^';
+            case LEFT :
+                return '>';
+            case RIGHT :
+                return '<';
+        }
     }
 }

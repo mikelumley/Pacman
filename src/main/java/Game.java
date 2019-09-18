@@ -26,8 +26,6 @@ public class Game {
 
             this.outputService.displayBoard(this.board);
         }
-        // TODO: 2019-09-17 Better way to do this?
-        ((ConsoleInputService)this.inputService).setConsoleToCookedMode();
         return this.board.calculateScore();
     }
 }

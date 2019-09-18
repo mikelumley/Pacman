@@ -5,9 +5,7 @@ public class Main {
         IMonsterController monsterController = new RandomMonsterController();
 
         Game game = new Game(inputService, outputService, monsterController);
-        int score = game.play();
-
-        System.out.println("You won!");
-        System.out.println("Your score was: " + score);
+        game.play();
+        ((ConsoleInputService)inputService).setConsoleToCookedMode();
     }
 }

@@ -2,9 +2,6 @@ import java.util.ArrayList;
 
 public class GameController implements IGameController {
 
-    private Direction pacmanDirection = Direction.UP;
-    private boolean pacmanDead = false;
-
     @Override
     public boolean isGameOver(Board board) {
         int foodRemaining = board.findFoodRemaining();
@@ -14,9 +11,10 @@ public class GameController implements IGameController {
     @Override
     public Board movePacman(Board board, Direction userInputDirection) {
         Position currentPosition = board.findPacman();
-        if (userInputDirection != null)
-            this.pacmanDirection = userInputDirection;
-        Position nextPosition = this.calculateNextPosition(board, currentPosition, this.pacmanDirection);
+        if (userInputDirection != null) {
+            board.setPacmanDirection(userInputDirection);
+        }
+        Position nextPosition = this.calculateNextPosition(board, currentPosition, board.getPacmanDirection());
         this.moveGameObject(board, GameObject.PACMAN, currentPosition, nextPosition);
         return board;
     }
