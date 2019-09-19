@@ -1,4 +1,6 @@
 public class ConsoleOutputService implements IOutputService {
+    private boolean isMouthOpen = true;
+
     @Override
     public void displayBoard(Board board) {
         // Clear terminal
@@ -24,17 +26,33 @@ public class ConsoleOutputService implements IOutputService {
         System.out.print("\r\n");
     }
 
-    private char getPacmanSymbol(Direction pacmanDirection) {
-        switch (pacmanDirection) {
-            default:
-            case UP :
-                return 'v';
-            case DOWN :
-                return '^';
-            case LEFT :
-                return '>';
-            case RIGHT :
-                return '<';
+    private char getPacmanSymbol(UserAction pacmanDirection) {
+        char pacmanSymbol = 'v';
+
+        if (isMouthOpen) {
+            if (pacmanDirection == UserAction.UP) {
+                pacmanSymbol = 'v';
+            }
+            else if (pacmanDirection == UserAction.DOWN) {
+                pacmanSymbol = '^';
+            }
+            else if (pacmanDirection == UserAction.LEFT) {
+                pacmanSymbol = '>';
+            }
+            else if (pacmanDirection == UserAction.RIGHT) {
+                pacmanSymbol = '<';
+            }
         }
+        else{
+            if (pacmanDirection == UserAction.UP || pacmanDirection == UserAction.DOWN) {
+                pacmanSymbol = '|';
+            }
+            else if (pacmanDirection == UserAction.LEFT || pacmanDirection == UserAction.RIGHT) {
+                pacmanSymbol = '-';
+            }
+        }
+
+        isMouthOpen = !isMouthOpen;
+        return pacmanSymbol;
     }
 }

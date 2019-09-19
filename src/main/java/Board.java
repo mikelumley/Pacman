@@ -4,7 +4,7 @@ public class Board {
     private Tile[][] tiles;
     private int numberOfRows;
     private int numberOfCols;
-    private Direction pacmanDirection = Direction.UP;
+    private UserAction pacmanDirection = UserAction.UP;
 
     public Board(Tile[][] tiles) {
         this.tiles = tiles;
@@ -28,12 +28,12 @@ public class Board {
         return this.numberOfCols;
     }
 
-    public Direction getPacmanDirection() {
+    public UserAction getPacmanDirection() {
         return this.pacmanDirection;
     }
 
-    public void setPacmanDirection(Direction direction) {
-        this.pacmanDirection = direction;
+    public void setPacmanDirection(UserAction userAction) {
+        this.pacmanDirection = userAction;
     }
 
     public Position findPacman() {

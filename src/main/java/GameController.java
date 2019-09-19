@@ -9,11 +9,10 @@ public class GameController implements IGameController {
     }
 
     @Override
-    public Board movePacman(Board board, Direction userInputDirection) {
+    public Board movePacman(Board board, UserAction userAction) {
         Position currentPosition = board.findPacman();
-        if (userInputDirection != null) {
-            board.setPacmanDirection(userInputDirection);
-        }
+        if (userAction != null)
+            board.setPacmanDirection(userAction);
         Position nextPosition = this.calculateNextPosition(board, currentPosition, board.getPacmanDirection());
         this.moveGameObject(board, GameObject.PACMAN, currentPosition, nextPosition);
         return board;
@@ -22,20 +21,19 @@ public class GameController implements IGameController {
     @Override
     public Board moveMonsters(Board board, IMonsterController monsterController) {
         ArrayList<Position> monsterPositions = board.findMonsters();
-
         for(Position currentPosition : monsterPositions) {
-            Direction monsterDirection = monsterController.getNextDirection(board, currentPosition);
+            UserAction monsterDirection = monsterController.getNextDirection(board, currentPosition);
             Position nextPosition = this.calculateNextPosition(board, currentPosition, monsterDirection);
             this.moveGameObject(board, GameObject.MONSTER, currentPosition, nextPosition);
         }
         return board;
     }
 
-    private Position calculateNextPosition(Board board, Position currentPosition, Direction direction) {
+    private Position calculateNextPosition(Board board, Position currentPosition, UserAction userAction) {
         int nextXPosition = 0;
         int nextYPosition = 0;
 
-        switch (direction) {
+        switch (userAction) {
             case UP:
                 nextXPosition = (currentPosition.getX() + board.getNumberOfRows() - 1) % board.getNumberOfRows();
                 nextYPosition = currentPosition.getY();

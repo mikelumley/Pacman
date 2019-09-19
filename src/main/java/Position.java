@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 public class Position {
     private int x;
     private int y;
@@ -24,7 +22,6 @@ public class Position {
         if (obj == null || getClass() != obj.getClass())
             return false;
         Position position = (Position) obj;
-        return x == position.x &&
-                y == position.y;
+        return x == position.x && y == position.y;
     }
 }

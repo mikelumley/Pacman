@@ -4,18 +4,18 @@ public class RandomMonsterController implements IMonsterController {
 
     private Random random = new Random();
     @Override
-    public Direction getNextDirection(Board board, Position currentPosition) {
+    public UserAction getNextDirection(Board board, Position currentPosition) {
         int randomNumber =  this.random.nextInt(4);
         switch (randomNumber) {
             default :
             case 0 :
-                return Direction.UP;
+                return UserAction.UP;
             case 1 :
-                return Direction.DOWN;
+                return UserAction.DOWN;
             case 2 :
-                return Direction.LEFT;
+                return UserAction.LEFT;
             case 3 :
-                return Direction.RIGHT;
+                return UserAction.RIGHT;
         }
     }
 }

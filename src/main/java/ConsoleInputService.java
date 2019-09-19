@@ -7,13 +7,25 @@ public class ConsoleInputService implements IInputService{
     private static final int W_CODE = 119;
     private static final int S_CODE = 115;
     private static final int A_CODE = 97;
-    private static final int D_Code = 100;
+    private static final int D_CODE = 100;
 
     private InputStreamReader consoleInputStream = new InputStreamReader(System.in);
     private BufferedReader bufferedConsoleInputReader = new BufferedReader(consoleInputStream);
 
     @Override
-    public Direction getUserInputDirection() {
+    public void openInputService() {
+        try {
+            String[] knockIntoRawMode = {"/bin/sh", "-c", "stty raw </dev/tty"};
+            Runtime.getRuntime().exec(knockIntoRawMode).waitFor();
+        } catch (InterruptedException | IOException e) {
+            System.err.println("Error: Unable to set console to raw mode");
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    @Override
+    public UserAction getUserInputAction() {
         int characterCode = 0;
         try {
             if (bufferedConsoleInputReader.ready())
@@ -26,34 +38,22 @@ public class ConsoleInputService implements IInputService{
 
         switch (characterCode) {
             case EXIT_CODE:
-                this.setConsoleToCookedMode();
-                System.out.print("Exiting\r\n");
-                System.exit(0);
+                return UserAction.EXIT;
             case W_CODE:
-                return Direction.UP;
+                return UserAction.UP;
             case S_CODE:
-                return Direction.DOWN;
+                return UserAction.DOWN;
             case A_CODE:
-                return Direction.LEFT;
-            case D_Code:
-                return Direction.RIGHT;
-            default :
-                return null;
+                return UserAction.LEFT;
+            case D_CODE:
+                return UserAction.RIGHT;
+            default:
+                return UserAction.NO_INPUT;
         }
     }
 
-    public void setConsoleToRawMode() {
-        try {
-            String[] knockIntoRawMode = {"/bin/sh", "-c", "stty raw </dev/tty"};
-            Runtime.getRuntime().exec(knockIntoRawMode).waitFor();
-        } catch (InterruptedException | IOException e) {
-            System.err.println("Error: Unable to set console to raw mode");
-            e.printStackTrace();
-            System.exit(1);
-        }
-    }
-
-    public void setConsoleToCookedMode() {
+    @Override
+    public void closeInputService() {
         try {
             String[] knockIntoCookedMode = {"/bin/sh", "-c", "stty cooked </dev/tty"};
             Runtime.getRuntime().exec(knockIntoCookedMode).waitFor();

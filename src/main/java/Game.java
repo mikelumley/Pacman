@@ -21,7 +21,18 @@ public class Game {
                 e.printStackTrace();
             }
 
-            this.board = this.gameController.movePacman(this.board, this.inputService.getUserInputDirection());
+            UserAction userAction = this.inputService.getUserInputAction();
+
+            if (userAction == UserAction.NO_INPUT) {
+                userAction = null;
+            }
+            else if (userAction == UserAction.EXIT) {
+                this.inputService.closeInputService();
+                System.out.print("Exiting\r\n");
+                System.exit(0);
+            }
+
+            this.board = this.gameController.movePacman(this.board, userAction);
             this.board = this.gameController.moveMonsters(this.board, this.monsterController);
 
             this.outputService.displayBoard(this.board);

@@ -4,9 +4,9 @@ public class Main {
         IOutputService outputService = new ConsoleOutputService();
         IMonsterController monsterController = new RandomMonsterController();
 
-        ((ConsoleInputService)inputService).setConsoleToRawMode();
+        inputService.openInputService();
         Game game = new Game(inputService, outputService, monsterController);
         game.play();
-        ((ConsoleInputService)inputService).setConsoleToCookedMode();
+        inputService.closeInputService();
     }
 }

@@ -1,13 +1,13 @@
 public class StubMonsterController implements IMonsterController {
 
-    private Direction directionToReturn;
+    private UserAction userActionToReturn;
 
-    public StubMonsterController(Direction directionToReturn) {
-        this.directionToReturn = directionToReturn;
+    public StubMonsterController(UserAction userActionToReturn) {
+        this.userActionToReturn = userActionToReturn;
     }
 
     @Override
-    public Direction getNextDirection(Board board, Position currentPosition) {
-        return this.directionToReturn;
+    public UserAction getNextDirection(Board board, Position currentPosition) {
+        return this.userActionToReturn;
     }
 }

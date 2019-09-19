@@ -1,3 +1,5 @@
 public interface IInputService {
-    Direction getUserInputDirection();
+    void openInputService();
+    UserAction getUserInputAction();
+    void closeInputService();
 }

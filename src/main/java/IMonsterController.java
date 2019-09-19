@@ -1,3 +1,3 @@
 public interface IMonsterController {
-    Direction getNextDirection(Board board, Position currentPosition);
+    UserAction getNextDirection(Board board, Position currentPosition);
 }
