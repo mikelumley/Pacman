@@ -1,8 +1,12 @@
+package com.pacman.input;
+
+import com.pacman.core.GameAction;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class ConsoleInputService implements IInputService{
+public class ConsoleKeyboardInputService implements IInputService{
     private static final int EXIT_CODE = 3;
     private static final int W_CODE = 119;
     private static final int S_CODE = 115;
@@ -25,7 +29,7 @@ public class ConsoleInputService implements IInputService{
     }
 
     @Override
-    public UserAction getUserInputAction() {
+    public GameAction getUserInputAction() {
         int characterCode = 0;
         try {
             if (bufferedConsoleInputReader.ready())
@@ -38,17 +42,17 @@ public class ConsoleInputService implements IInputService{
 
         switch (characterCode) {
             case EXIT_CODE:
-                return UserAction.EXIT;
+                return GameAction.EXIT;
             case W_CODE:
-                return UserAction.UP;
+                return GameAction.UP;
             case S_CODE:
-                return UserAction.DOWN;
+                return GameAction.DOWN;
             case A_CODE:
-                return UserAction.LEFT;
+                return GameAction.LEFT;
             case D_CODE:
-                return UserAction.RIGHT;
+                return GameAction.RIGHT;
             default:
-                return UserAction.NO_INPUT;
+                return GameAction.NO_INPUT;
         }
     }
 

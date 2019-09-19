@@ -1,4 +1,8 @@
+import com.pacman.core.Board;
+import com.pacman.core.GameObject;
+import com.pacman.core.Tile;
 import org.junit.Test;
+import com.pacman.utils.BoardFactory;
 
 import static org.junit.Assert.*;
 

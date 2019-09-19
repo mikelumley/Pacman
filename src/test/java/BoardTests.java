@@ -1,4 +1,7 @@
+import com.pacman.core.Board;
+import com.pacman.core.Coordinates;
 import org.junit.Test;
+import com.pacman.utils.BoardFactory;
 
 import java.util.ArrayList;
 
@@ -13,8 +16,8 @@ public class BoardTests {
         char[] row3 = {'.', '.', '.'};
         char[][] boardAsChar = {row1, row2, row3};
         Board board = BoardFactory.createBoardFromChars(boardAsChar);
-        Position result = board.findPacman();
-        Position expected = new Position(1,1);
+        Coordinates result = board.findPacman();
+        Coordinates expected = new Coordinates(1,1);
         assertEquals(expected, result);
     }
 
@@ -25,8 +28,8 @@ public class BoardTests {
         char[] row3 = {'.', '.', '.'};
         char[][] boardAsChar = {row1, row2, row3};
         Board board = BoardFactory.createBoardFromChars(boardAsChar);
-        Position result = board.findPacman();
-        Position expected = null;
+        Coordinates result = board.findPacman();
+        Coordinates expected = null;
         assertEquals(expected, result);
     }
 
@@ -38,11 +41,11 @@ public class BoardTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board board = BoardFactory.createBoardFromChars(boardAsChar);
 
-        ArrayList<Position> result = board.findMonsters();
-        Position[] resultAsArray = new Position[result.size()];
+        ArrayList<Coordinates> result = board.findMonsters();
+        Coordinates[] resultAsArray = new Coordinates[result.size()];
         result.toArray(resultAsArray);
 
-        Position[] expected = {new Position(1,1), new Position(1,2), new Position(2,2)};
+        Coordinates[] expected = {new Coordinates(1,1), new Coordinates(1,2), new Coordinates(2,2)};
         assertArrayEquals(expected, resultAsArray);
     }
 
@@ -54,11 +57,11 @@ public class BoardTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board board = BoardFactory.createBoardFromChars(boardAsChar);
 
-        ArrayList<Position> result = board.findMonsters();
-        Position[] resultAsArray = new Position[result.size()];
+        ArrayList<Coordinates> result = board.findMonsters();
+        Coordinates[] resultAsArray = new Coordinates[result.size()];
         result.toArray(resultAsArray);
 
-        Position[] expected = {};
+        Coordinates[] expected = {};
         assertArrayEquals(expected, resultAsArray);
     }
 

@@ -1,4 +1,9 @@
+import com.pacman.core.Board;
+import com.pacman.core.GameController;
+import com.pacman.core.IMonsterController;
+import com.pacman.core.GameAction;
 import org.junit.Test;
+import com.pacman.utils.BoardFactory;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +17,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, UserAction.UP);
+        Board result = updater.movePacman(startingBoard, GameAction.UP);
 
         char[] expectedRow1 = {' ', 'P', ' '};
         char[] expectedRow2 = {' ', ' ', ' '};
@@ -30,7 +35,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, UserAction.DOWN);
+        Board result = updater.movePacman(startingBoard, GameAction.DOWN);
 
         char[] expectedRow1 = {' ', ' ', ' '};
         char[] expectedRow2 = {' ', ' ', ' '};
@@ -48,7 +53,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, UserAction.LEFT);
+        Board result = updater.movePacman(startingBoard, GameAction.LEFT);
 
         char[] expectedRow1 = {' ', ' ', ' '};
         char[] expectedRow2 = {'P', ' ', ' '};
@@ -66,7 +71,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, UserAction.RIGHT);
+        Board result = updater.movePacman(startingBoard, GameAction.RIGHT);
 
         char[] expectedRow1 = {' ', ' ', ' '};
         char[] expectedRow2 = {' ', ' ', 'P'};
@@ -84,7 +89,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, UserAction.UP);
+        Board result = updater.movePacman(startingBoard, GameAction.UP);
 
         char[] expectedRow1 = {' ', ' ', ' '};
         char[] expectedRow2 = {' ', ' ', ' '};
@@ -102,7 +107,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, UserAction.DOWN);
+        Board result = updater.movePacman(startingBoard, GameAction.DOWN);
 
         char[] expectedRow1 = {' ', 'P', ' '};
         char[] expectedRow2 = {' ', ' ', ' '};
@@ -120,7 +125,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, UserAction.LEFT);
+        Board result = updater.movePacman(startingBoard, GameAction.LEFT);
 
         char[] expectedRow1 = {' ', ' ', ' '};
         char[] expectedRow2 = {' ', ' ', 'P'};
@@ -138,7 +143,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, UserAction.RIGHT);
+        Board result = updater.movePacman(startingBoard, GameAction.RIGHT);
 
         char[] expectedRow1 = {' ', ' ', ' '};
         char[] expectedRow2 = {'P', ' ', ' '};
@@ -156,7 +161,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, UserAction.UP);
+        Board result = updater.movePacman(startingBoard, GameAction.UP);
         Board expected = BoardFactory.createBoardFromChars(boardAsChar);
         assertArrayEquals(expected.getTiles(), result.getTiles());
     }
@@ -169,7 +174,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, UserAction.DOWN);
+        Board result = updater.movePacman(startingBoard, GameAction.DOWN);
         Board expected = BoardFactory.createBoardFromChars(boardAsChar);
         assertArrayEquals(expected.getTiles(), result.getTiles());
     }
@@ -182,7 +187,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, UserAction.LEFT);
+        Board result = updater.movePacman(startingBoard, GameAction.LEFT);
         Board expected = BoardFactory.createBoardFromChars(boardAsChar);
         assertArrayEquals(expected.getTiles(), result.getTiles());
     }
@@ -194,7 +199,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, UserAction.RIGHT);
+        Board result = updater.movePacman(startingBoard, GameAction.RIGHT);
         Board expected = BoardFactory.createBoardFromChars(boardAsChar);
         assertArrayEquals(expected.getTiles(), result.getTiles());
     }
@@ -207,7 +212,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        IMonsterController monsterController = new StubMonsterController(UserAction.UP);
+        IMonsterController monsterController = new StubMonsterController(GameAction.UP);
         Board result = updater.moveMonsters(startingBoard, monsterController);
 
         char[] expectedRow1 = {' ', 'M', ' '};
@@ -226,7 +231,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        IMonsterController monsterController = new StubMonsterController(UserAction.DOWN);
+        IMonsterController monsterController = new StubMonsterController(GameAction.DOWN);
         Board result = updater.moveMonsters(startingBoard, monsterController);
 
         char[] expectedRow1 = {' ', ' ', ' '};
@@ -245,7 +250,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        IMonsterController monsterController = new StubMonsterController(UserAction.LEFT);
+        IMonsterController monsterController = new StubMonsterController(GameAction.LEFT);
         Board result = updater.moveMonsters(startingBoard, monsterController);
 
         char[] expectedRow1 = {' ', ' ', ' '};
@@ -264,7 +269,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        IMonsterController monsterController = new StubMonsterController(UserAction.RIGHT);
+        IMonsterController monsterController = new StubMonsterController(GameAction.RIGHT);
         Board result = updater.moveMonsters(startingBoard, monsterController);
 
         char[] expectedRow1 = {' ', ' ', ' '};
@@ -283,7 +288,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        IMonsterController monsterController = new StubMonsterController(UserAction.UP);
+        IMonsterController monsterController = new StubMonsterController(GameAction.UP);
         Board result = updater.moveMonsters(startingBoard, monsterController);
 
         char[] expectedRow1 = {'.', 'M', '.'};
@@ -302,7 +307,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board startingBoard = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        IMonsterController monsterController = new StubMonsterController(UserAction.LEFT);
+        IMonsterController monsterController = new StubMonsterController(GameAction.LEFT);
         Board result = updater.moveMonsters(startingBoard, monsterController);
 
         char[] expectedRow1 = {'.', '.', '.'};
@@ -354,7 +359,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board board = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        board = updater.moveMonsters(board, new StubMonsterController(UserAction.LEFT));
+        board = updater.moveMonsters(board, new StubMonsterController(GameAction.LEFT));
         assertTrue(updater.isGameOver(board));
     }
 
@@ -366,7 +371,7 @@ public class GameControllerTests {
         char[][] boardAsChar = {row1, row2, row3};
         Board board = BoardFactory.createBoardFromChars(boardAsChar);
         GameController updater = new GameController();
-        board = updater.movePacman(board, UserAction.RIGHT);
+        board = updater.movePacman(board, GameAction.RIGHT);
         assertTrue(updater.isGameOver(board));
     }
 }

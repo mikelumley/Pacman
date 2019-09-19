@@ -1,3 +1,5 @@
+package com.pacman.core;
+
 public class Tile {
 
     private GameObject objectOnTile;

@@ -1,3 +1,10 @@
+package com.pacman.output;
+
+import com.pacman.core.Board;
+import com.pacman.core.GameObject;
+import com.pacman.core.Tile;
+import com.pacman.core.GameAction;
+
 public class ConsoleOutputService implements IOutputService {
     private boolean isMouthOpen = true;
 
@@ -11,7 +18,7 @@ public class ConsoleOutputService implements IOutputService {
         for(Tile[] row : board.getTiles()) {
             for(Tile tile : row) {
                 if (tile.getObjectOnTile() == GameObject.PACMAN)
-                    System.out.print(this.getPacmanSymbol(board.getPacmanDirection()));
+                    System.out.print(this.getPacmanSymbol(board.getLastAction()));
                 else if (tile.getObjectOnTile() == GameObject.EMPTY && tile.hasFood())
                     System.out.print('.');
                 else if (tile.getObjectOnTile() == GameObject.WALL)
@@ -26,28 +33,33 @@ public class ConsoleOutputService implements IOutputService {
         System.out.print("\r\n");
     }
 
-    private char getPacmanSymbol(UserAction pacmanDirection) {
+    @Override
+    public void displayFinalScore(int finalScore) {
+        System.out.println("Final score was: " + finalScore);
+    }
+
+    private char getPacmanSymbol(GameAction pacmanDirection) {
         char pacmanSymbol = 'v';
 
         if (isMouthOpen) {
-            if (pacmanDirection == UserAction.UP) {
+            if (pacmanDirection == GameAction.UP) {
                 pacmanSymbol = 'v';
             }
-            else if (pacmanDirection == UserAction.DOWN) {
+            else if (pacmanDirection == GameAction.DOWN) {
                 pacmanSymbol = '^';
             }
-            else if (pacmanDirection == UserAction.LEFT) {
+            else if (pacmanDirection == GameAction.LEFT) {
                 pacmanSymbol = '>';
             }
-            else if (pacmanDirection == UserAction.RIGHT) {
+            else if (pacmanDirection == GameAction.RIGHT) {
                 pacmanSymbol = '<';
             }
         }
         else{
-            if (pacmanDirection == UserAction.UP || pacmanDirection == UserAction.DOWN) {
+            if (pacmanDirection == GameAction.UP || pacmanDirection == GameAction.DOWN) {
                 pacmanSymbol = '|';
             }
-            else if (pacmanDirection == UserAction.LEFT || pacmanDirection == UserAction.RIGHT) {
+            else if (pacmanDirection == GameAction.LEFT || pacmanDirection == GameAction.RIGHT) {
                 pacmanSymbol = '-';
             }
         }

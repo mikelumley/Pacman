@@ -1,8 +1,10 @@
-public class Position {
+package com.pacman.core;
+
+public class Coordinates {
     private int x;
     private int y;
 
-    public Position(int x, int y) {
+    public Coordinates(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -21,7 +23,7 @@ public class Position {
             return true;
         if (obj == null || getClass() != obj.getClass())
             return false;
-        Position position = (Position) obj;
+        Coordinates position = (Coordinates) obj;
         return x == position.x && y == position.y;
     }
 }

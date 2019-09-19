@@ -1,4 +1,6 @@
-public enum UserAction {
+package com.pacman.core;
+
+public enum GameAction {
     UP,
     DOWN,
     LEFT,

@@ -1,3 +1,9 @@
+package com.pacman.utils;
+
+import com.pacman.core.Board;
+import com.pacman.core.GameObject;
+import com.pacman.core.Tile;
+
 public class BoardFactory {
 
     public static Board createBoardFromChars(char[][] boardAsChars) {
