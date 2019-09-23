@@ -1,8 +1,6 @@
 package com.pacman.output;
 
-import com.pacman.core.Board;
-
 public interface IOutputService {
-    void displayBoard(Board board);
+    void displayBoard(String boardAsString, int score);
     void displayFinalScore(int finalScore);
 }

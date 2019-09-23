@@ -3,6 +3,7 @@ package com.pacman.core;
 import com.pacman.input.IInputService;
 import com.pacman.input.InputAdaptor;
 import com.pacman.output.IOutputService;
+import com.pacman.output.OutputAdaptor;
 import com.pacman.utils.BoardFactory;
 
 public class Game {
@@ -13,6 +14,7 @@ public class Game {
     private IInputService inputService;
     private InputAdaptor inputAdaptor = new InputAdaptor();
     private IOutputService outputService;
+    private OutputAdaptor outputAdaptor = new OutputAdaptor();
     private IGameController gameController;
     private IMonsterController monsterController;
 
@@ -34,7 +36,7 @@ public class Game {
             }
 
             int characterCode = this.inputService.readUserInput();
-            GameAction gameAction = inputAdaptor.inputToAction(characterCode);
+            GameAction gameAction = this.inputAdaptor.inputToAction(characterCode);
 
             if (gameAction == GameAction.EXIT) {
                 this.inputService.closeInputService();
@@ -45,7 +47,8 @@ public class Game {
             this.board = this.gameController.movePacman(this.board, gameAction);
             this.board = this.gameController.moveMonsters(this.board, this.monsterController);
 
-            this.outputService.displayBoard(this.board);
+            String boardAsString = this.outputAdaptor.boardToString(board);
+            this.outputService.displayBoard(boardAsString, this.board.calculateScore());
         }
         return this.board.calculateScore();
     }
