@@ -402,7 +402,7 @@ public class GameControllerTests {
     @Test
     public void Given_BoardWithFoodAndMonsterAtePacman_When_CheckingIfGameOver_Then_ReturnTrue() {
         Board board = new Board(new Tile[][]{
-                {new Tile(), new Tile(), new Tile()},
+                {new Tile(GameObject.FOOD), new Tile(), new Tile()},
                 {new Tile(), new Tile(GameObject.PACMAN), new Tile(GameObject.MONSTER)},
                 {new Tile(), new Tile(), new Tile()}
         });
@@ -414,7 +414,7 @@ public class GameControllerTests {
     @Test
     public void Given_BoardWithFoodAndPacmanMoveOntoMonster_When_CheckingIfGameOver_Then_ReturnTrue() {
         Board board = new Board(new Tile[][]{
-                {new Tile(), new Tile(), new Tile()},
+                {new Tile(GameObject.FOOD), new Tile(), new Tile()},
                 {new Tile(), new Tile(GameObject.PACMAN), new Tile(GameObject.MONSTER)},
                 {new Tile(), new Tile(), new Tile()}
         });

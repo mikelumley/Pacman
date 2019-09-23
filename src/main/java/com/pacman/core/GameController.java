@@ -62,11 +62,11 @@ public class GameController implements IGameController {
 
         if (this.canMoveOntoTile(gameObject, nextTile)) {
             currentTile.removeObjectFromTile(gameObject);
+            nextTile.addObjectToTile(gameObject);
+            if (nextTile.getObjectsOnTile().contains(GameObject.PACMAN) && nextTile.getObjectsOnTile().contains(GameObject.MONSTER))
+                nextTile.removeObjectFromTile(GameObject.PACMAN);
             if (gameObject == GameObject.PACMAN)
                 currentTile.removeObjectFromTile(GameObject.FOOD);
-            nextTile.addObjectToTile(gameObject);
-//            if (nextTile.getObjectsOnTile() != GameObject.MONSTER)
-//                nextTile.setObjectOnTile(gameObject);
         }
     }
 
