@@ -18,7 +18,6 @@ public class OutputAdaptorTests {
 
         OutputAdaptor outputAdaptor = new OutputAdaptor();
         String result = outputAdaptor.boardToString(board);
-
         String expected = ".v.\r\n" +
                           "M .\r\n" +
                           "..=\r\n";
