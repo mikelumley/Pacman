@@ -31,6 +31,19 @@ public class GameController implements IGameController {
         return board;
     }
 
+    @Override
+    public int calculateScore(Board board) {
+        int score = 0;
+        for (Tile[] row : board.getTiles()) {
+            for (Tile currentTile : row) {
+                boolean tileIsEmptyAndNoFood = currentTile.getObjectsOnTile().size() == 0;
+                if (tileIsEmptyAndNoFood)
+                    score++;
+            }
+        }
+        return score;
+    }
+
     private Coordinates calculateNextPosition(Board board, Coordinates currentPosition, GameAction gameAction) {
         int nextXPosition = 0;
         int nextYPosition = 0;

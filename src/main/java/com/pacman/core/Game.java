@@ -28,6 +28,8 @@ public class Game {
     }
 
     public int play() {
+        int score = 0;
+
         while(!this.gameController.isGameOver(this.board)) {
             try {
                 Thread.sleep(TIME_BETWEEN_UPDATES);
@@ -48,8 +50,9 @@ public class Game {
             this.board = this.gameController.moveMonsters(this.board, this.monsterController);
 
             String boardAsString = this.outputAdaptor.boardToString(board);
-            this.outputService.displayBoard(boardAsString, this.board.calculateScore());
+            score = this.gameController.calculateScore(this.board);
+            this.outputService.displayBoard(boardAsString, score);
         }
-        return this.board.calculateScore();
+        return score;
     }
 }

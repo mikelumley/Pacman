@@ -422,4 +422,52 @@ public class GameControllerTests {
         board = updater.movePacman(board, GameAction.RIGHT);
         assertTrue(updater.isGameOver(board));
     }
+
+    @Test
+    public void Given_BoardWithNoFoodEaten_When_CalculatingScore_Then_Return0() {
+        Board board = new Board(new Tile[][]{
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.PACMAN), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
+        });
+        IGameController gameController = new GameController();
+        int result = gameController.calculateScore(board);
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void Given_BoardWith1FoodEaten_When_CalculatingScore_Then_Return1() {
+        Board board = new Board(new Tile[][]{
+                {new Tile(GameObject.FOOD), new Tile(GameObject.PACMAN), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
+        });
+        IGameController gameController = new GameController();
+        int result = gameController.calculateScore(board);
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void Given_BoardWith1FoodEatenAndWall_When_CalculatingScore_Then_Return1() {
+        Board board = new Board(new Tile[][]{
+                {new Tile(GameObject.FOOD), new Tile(GameObject.PACMAN), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.WALL), new Tile(), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
+        });
+        IGameController gameController = new GameController();
+        int result = gameController.calculateScore(board);
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void Given_BoardWith1FoodEatenAndMonster_When_CalculatingScore_Then_Return1() {
+        Board board = new Board(new Tile[][]{
+                {new Tile(GameObject.FOOD), new Tile(GameObject.PACMAN), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.MONSTER), new Tile(), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
+        });
+        IGameController gameController = new GameController();
+        int result = gameController.calculateScore(board);
+        assertEquals(1, result);
+    }
 }

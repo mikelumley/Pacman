@@ -77,16 +77,4 @@ public class Board {
         }
         return food;
     }
-
-    public int calculateScore() {
-        int score = 0;
-        for (Tile[] row : this.tiles) {
-            for (Tile currentTile : row) {
-                boolean tileIsEmptyAndNoFood = currentTile.getObjectsOnTile().size() == 0;
-                if (tileIsEmptyAndNoFood)
-                    score++;
-            }
-        }
-        return score;
-    }
 }
