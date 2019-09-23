@@ -22,7 +22,7 @@ public class BoardTests {
     }
 
     @Test
-    public void Given_BoardWithNoPacman_When_FindingPacman_Then_ThrowExpection() {
+    public void Given_BoardWithNoPacman_When_FindingPacman_Then_ReturnNull() {
         char[] row1 = {'.', '.', '.'};
         char[] row2 = {'.', '.', '.'};
         char[] row3 = {'.', '.', '.'};

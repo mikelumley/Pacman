@@ -11,10 +11,13 @@ public class Main {
         IGameController gameController = new GameController();
         IMonsterController monsterController = new RandomMonsterController();
 
-        inputService.openInputService();
-        Game game = new Game(inputService, outputService, gameController, monsterController);
-        int finalScore = game.play();
-        inputService.closeInputService();
-        outputService.displayFinalScore(finalScore);
+        try {
+            inputService.openInputService();
+            Game game = new Game(inputService, outputService, gameController, monsterController);
+            int finalScore = game.play();
+            outputService.displayFinalScore(finalScore);
+        } finally {
+            inputService.closeInputService();
+        }
     }
 }
