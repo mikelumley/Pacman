@@ -13,6 +13,7 @@ public class Main {
 
         try {
             inputService.openInputService();
+
             Game game = new Game(inputService, outputService, gameController, monsterController);
             int finalScore = game.play();
             outputService.displayFinalScore(finalScore);

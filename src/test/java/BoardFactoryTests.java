@@ -4,6 +4,8 @@ import com.pacman.core.Tile;
 import org.junit.Test;
 import com.pacman.utils.BoardFactory;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class BoardFactoryTests {
@@ -16,9 +18,9 @@ public class BoardFactoryTests {
         char[][] charBoard = {row1, row2, row3};
         Board result = BoardFactory.createBoardFromChars(charBoard);
         Tile[][] expected = {
-                {new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY)},
-                {new Tile(GameObject.EMPTY), new Tile(GameObject.PACMAN), new Tile(GameObject.EMPTY)},
-                {new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY)}
+                {new Tile(), new Tile(), new Tile()},
+                {new Tile(), new Tile(GameObject.PACMAN), new Tile()},
+                {new Tile(), new Tile(), new Tile()}
         };
         assertArrayEquals(expected, result.getTiles());
     }
@@ -31,9 +33,9 @@ public class BoardFactoryTests {
         char[][] charBoard = {row1, row2, row3};
         Board result = BoardFactory.createBoardFromChars(charBoard);
         Tile[][] expected = {
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.PACMAN), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)}
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.PACMAN), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
         };
 
         assertArrayEquals(expected, result.getTiles());
@@ -47,9 +49,9 @@ public class BoardFactoryTests {
         char[][] charBoard = {row1, row2, row3};
         Board result = BoardFactory.createBoardFromChars(charBoard);
         Tile[][] expected = {
-                {new Tile(GameObject.EMPTY), new Tile(GameObject.WALL), new Tile(GameObject.EMPTY)},
-                {new Tile(GameObject.EMPTY), new Tile(GameObject.PACMAN), new Tile(GameObject.EMPTY)},
-                {new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY)}
+                {new Tile(), new Tile(GameObject.WALL), new Tile()},
+                {new Tile(), new Tile(GameObject.PACMAN), new Tile()},
+                {new Tile(), new Tile(), new Tile()}
         };
 
         assertArrayEquals(expected, result.getTiles());
@@ -62,10 +64,15 @@ public class BoardFactoryTests {
         char[] row3 = {' ', ' ', ' '};
         char[][] charBoard = {row1, row2, row3};
         Board result = BoardFactory.createBoardFromChars(charBoard);
+
+        ArrayList<GameObject> objectsOnMonsterTile = new ArrayList<>();
+        objectsOnMonsterTile.add(GameObject.MONSTER);
+        objectsOnMonsterTile.add(GameObject.FOOD);
+
         Tile[][] expected = {
-                {new Tile(GameObject.EMPTY), new Tile(GameObject.MONSTER), new Tile(GameObject.EMPTY)},
-                {new Tile(GameObject.EMPTY), new Tile(GameObject.PACMAN), new Tile(GameObject.EMPTY)},
-                {new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY), new Tile(GameObject.EMPTY)}
+                {new Tile(), new Tile(objectsOnMonsterTile), new Tile()},
+                {new Tile(), new Tile(GameObject.PACMAN), new Tile()},
+                {new Tile(), new Tile(), new Tile()}
         };
 
         assertArrayEquals(expected, result.getTiles());
@@ -74,10 +81,15 @@ public class BoardFactoryTests {
     @Test
     public void When_CreatingInitialBoard_Then_ReturnBoardOfFoodWithPacmanInMiddle() {
         Board result = BoardFactory.initialiseBoard();
-        Tile food = new Tile(GameObject.EMPTY, true);
-        Tile pacman = new Tile(GameObject.PACMAN,false);
-        Tile monster = new Tile(GameObject.MONSTER, true);
-        Tile wall = new Tile(GameObject.WALL, false);
+        Tile food = new Tile(GameObject.FOOD);
+        Tile pacman = new Tile(GameObject.PACMAN);
+
+        ArrayList<GameObject> objectsOnMonsterTile = new ArrayList<>();
+        objectsOnMonsterTile.add(GameObject.MONSTER);
+        objectsOnMonsterTile.add(GameObject.FOOD);
+
+        Tile monster = new Tile(objectsOnMonsterTile);
+        Tile wall = new Tile(GameObject.WALL);
 
         Tile[][] expected = {
                 {wall, food, food, food, food, wall, food},

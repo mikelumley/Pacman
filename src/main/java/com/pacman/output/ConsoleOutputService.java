@@ -17,14 +17,14 @@ public class ConsoleOutputService implements IOutputService {
 
         for(Tile[] row : board.getTiles()) {
             for(Tile tile : row) {
-                if (tile.getObjectOnTile() == GameObject.PACMAN)
+                if (tile.getObjectsOnTile().contains(GameObject.PACMAN))
                     System.out.print(this.getPacmanSymbol(board.getLastAction()));
-                else if (tile.getObjectOnTile() == GameObject.EMPTY && tile.hasFood())
-                    System.out.print('.');
-                else if (tile.getObjectOnTile() == GameObject.WALL)
-                    System.out.print('=');
-                else if (tile.getObjectOnTile() == GameObject.MONSTER)
+                else if (tile.getObjectsOnTile().contains(GameObject.MONSTER))
                     System.out.print('M');
+                else if (tile.getObjectsOnTile().contains(GameObject.FOOD))
+                    System.out.print('.');
+                else if (tile.getObjectsOnTile().contains(GameObject.WALL))
+                    System.out.print('=');
                 else
                     System.out.print(' ');
             }
@@ -35,7 +35,7 @@ public class ConsoleOutputService implements IOutputService {
 
     @Override
     public void displayFinalScore(int finalScore) {
-        System.out.println("Final score was: " + finalScore);
+        System.out.print("Final score was: " + finalScore + "\r\n");
     }
 
     private char getPacmanSymbol(GameAction pacmanDirection) {

@@ -1,6 +1,7 @@
 package com.pacman.core;
 
 import com.pacman.input.IInputService;
+import com.pacman.input.InputAdaptor;
 import com.pacman.output.IOutputService;
 import com.pacman.utils.BoardFactory;
 
@@ -10,6 +11,7 @@ public class Game {
 
     private Board board;
     private IInputService inputService;
+    private InputAdaptor inputAdaptor = new InputAdaptor();
     private IOutputService outputService;
     private IGameController gameController;
     private IMonsterController monsterController;
@@ -31,7 +33,9 @@ public class Game {
                 e.printStackTrace();
             }
 
-            GameAction gameAction = this.inputService.getUserInputAction();
+            int characterCode = this.inputService.readUserInput();
+            GameAction gameAction = inputAdaptor.inputToAction(characterCode);
+
             if (gameAction == GameAction.EXIT) {
                 this.inputService.closeInputService();
                 System.out.print("Exiting\r\n");

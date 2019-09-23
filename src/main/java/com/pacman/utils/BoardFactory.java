@@ -4,6 +4,8 @@ import com.pacman.core.Board;
 import com.pacman.core.GameObject;
 import com.pacman.core.Tile;
 
+import java.util.ArrayList;
+
 public class BoardFactory {
 
     public static Board createBoardFromChars(char[][] boardAsChars) {
@@ -16,19 +18,20 @@ public class BoardFactory {
             for(int j = 0; j < numberOfCols; j++) {
                 char currentChar = boardAsChars[i][j];
                 if (currentChar == 'P') {
-                    tiles[i][j] = new Tile(GameObject.PACMAN, false);
+                    tiles[i][j] = new Tile(GameObject.PACMAN);
                 }
                 else if (currentChar == ' ') {
-                    tiles[i][j] = new Tile(GameObject.EMPTY, false);
+                    tiles[i][j] = new Tile();
                 }
                 else if (currentChar == '.') {
-                    tiles[i][j] = new Tile(GameObject.EMPTY, true);
+                    tiles[i][j] = new Tile(GameObject.FOOD);
                 }
                 else if (currentChar == 'W') {
-                    tiles[i][j] = new Tile(GameObject.WALL, false);
+                    tiles[i][j] = new Tile(GameObject.WALL);
                 }
                 else if (currentChar == 'M') {
-                    tiles[i][j] = new Tile(GameObject.MONSTER, true);
+                    tiles[i][j] = new Tile(GameObject.MONSTER);
+                    tiles[i][j].addObjectToTile(GameObject.FOOD);
                 }
             }
         }

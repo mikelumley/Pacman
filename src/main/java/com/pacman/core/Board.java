@@ -42,7 +42,7 @@ public class Board {
         for(int i = 0; i < this.numberOfRows; i++) {
             for(int j = 0; j < this.numberOfCols; j++) {
                 Tile currentTile = this.tiles[i][j];
-                boolean tileHasPacman = currentTile.getObjectOnTile() == GameObject.PACMAN;
+                boolean tileHasPacman = currentTile.getObjectsOnTile().contains(GameObject.PACMAN);
                 if (tileHasPacman) {
                     return new Coordinates(i, j);
                 }
@@ -56,7 +56,7 @@ public class Board {
         for(int i = 0; i < this.numberOfRows; i++) {
             for(int j = 0; j < this.numberOfCols; j++) {
                 Tile currentTile = this.tiles[i][j];
-                boolean tileHasMonster = currentTile.getObjectOnTile() == GameObject.MONSTER;
+                boolean tileHasMonster = currentTile.getObjectsOnTile().contains(GameObject.MONSTER);
                 if (tileHasMonster) {
                     monsterPositions.add(new Coordinates(i, j));
                 }
@@ -69,7 +69,7 @@ public class Board {
         int food = 0;
         for (Tile[] row : this.tiles) {
             for (Tile currentTile : row) {
-                boolean tileIsEmptyAndHasFood = currentTile.getObjectOnTile() == GameObject.EMPTY && currentTile.hasFood();
+                boolean tileIsEmptyAndHasFood = currentTile.getObjectsOnTile().contains(GameObject.FOOD);
                 if (tileIsEmptyAndHasFood) {
                     food++;
                 }
@@ -82,7 +82,7 @@ public class Board {
         int score = 0;
         for (Tile[] row : this.tiles) {
             for (Tile currentTile : row) {
-                boolean tileIsEmptyAndNoFood = currentTile.getObjectOnTile() == GameObject.EMPTY && !currentTile.hasFood();
+                boolean tileIsEmptyAndNoFood = currentTile.getObjectsOnTile().size() == 0;
                 if (tileIsEmptyAndNoFood)
                     score++;
             }

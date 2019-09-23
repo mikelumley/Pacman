@@ -1,34 +1,35 @@
 package com.pacman.core;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
 public class Tile {
 
-    private GameObject objectOnTile;
-    private boolean foodOnTile = false;
+    private ArrayList<GameObject> objectsOnTile;
+
+    public Tile() {
+        this.objectsOnTile = new ArrayList<>();
+    }
 
     public Tile(GameObject objectOnTile) {
-        this.objectOnTile = objectOnTile;
-        this.foodOnTile = false;
+        this.objectsOnTile = new ArrayList<>();
+        this.objectsOnTile.add(objectOnTile);
     }
 
-    public Tile(GameObject objectOnTile, boolean foodOnTile) {
-        this.objectOnTile = objectOnTile;
-        this.foodOnTile = foodOnTile;
+    public Tile(ArrayList<GameObject> objectsOnTile) {
+        this.objectsOnTile = objectsOnTile;
     }
 
-    public GameObject getObjectOnTile() {
-        return this.objectOnTile;
+    public ArrayList<GameObject> getObjectsOnTile() {
+        return this.objectsOnTile;
     }
 
-    public void setObjectOnTile(GameObject objectOnTile) {
-        this.objectOnTile = objectOnTile;
+    public void addObjectToTile(GameObject objectToAdd) {
+        this.objectsOnTile.add(objectToAdd);
     }
 
-    public boolean hasFood() {
-        return this.foodOnTile;
-    }
-
-    public void setFoodOnTile(boolean hasFood) {
-        this.foodOnTile = hasFood;
+    public void removeObjectFromTile(GameObject objectToRemove) {
+        this.objectsOnTile.remove(objectToRemove);
     }
 
     @Override
@@ -38,6 +39,6 @@ public class Tile {
         if (obj == null || getClass() != obj.getClass())
             return false;
         Tile tile = (Tile) obj;
-        return objectOnTile == tile.objectOnTile;
+        return Objects.equals(objectsOnTile, tile.objectsOnTile);
     }
 }

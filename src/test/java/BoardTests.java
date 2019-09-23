@@ -14,9 +14,9 @@ public class BoardTests {
     @Test
     public void Given_BoardWithPacmanAtMiddle_When_FindingPacman_Then_ReturnMiddlePosition() {
         Board board = new Board(new Tile[][]{
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.PACMAN, true), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)}
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.PACMAN), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
         });
         Coordinates result = board.findPacman();
         Coordinates expected = new Coordinates(1,1);
@@ -26,9 +26,9 @@ public class BoardTests {
     @Test
     public void Given_BoardWithNoPacman_When_FindingPacman_Then_ReturnNull() {
         Board board = new Board(new Tile[][]{
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)}
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
         });
         Coordinates result = board.findPacman();
         Coordinates expected = null;
@@ -38,9 +38,9 @@ public class BoardTests {
     @Test
     public void Given_BoardWithMonsters_When_FindingMonsters_Then_ReturnTheirPositions() {
         Board board = new Board(new Tile[][]{
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.MONSTER, true), new Tile(GameObject.MONSTER, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.MONSTER, true)}
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.MONSTER), new Tile(GameObject.MONSTER)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.MONSTER)}
         });
 
         ArrayList<Coordinates> result = board.findMonsters();
@@ -54,9 +54,9 @@ public class BoardTests {
     @Test
     public void Given_BoardWithNoMonsters_When_FindingMonsters_Then_ReturnEmptyList() {
         Board board = new Board(new Tile[][]{
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)}
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
         });
 
         ArrayList<Coordinates> result = board.findMonsters();
@@ -70,9 +70,9 @@ public class BoardTests {
     @Test
     public void Given_BoardWithNoFoodEaten_When_CalculatingScore_Then_Return0() {
         Board board = new Board(new Tile[][]{
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.PACMAN, false), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)}
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.PACMAN), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
         });
         int result = board.calculateScore();
         assertEquals(0, result);
@@ -81,9 +81,9 @@ public class BoardTests {
     @Test
     public void Given_BoardWith1FoodEaten_When_CalculatingScore_Then_Return1() {
         Board board = new Board(new Tile[][]{
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.PACMAN, false), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, false), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)}
+                {new Tile(GameObject.FOOD), new Tile(GameObject.PACMAN), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
         });
         int result = board.calculateScore();
         assertEquals(1, result);
@@ -92,9 +92,9 @@ public class BoardTests {
     @Test
     public void Given_BoardWith1FoodEatenAndWall_When_CalculatingScore_Then_Return1() {
         Board board = new Board(new Tile[][]{
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.PACMAN, false), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.WALL, false), new Tile(GameObject.EMPTY, false), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)}
+                {new Tile(GameObject.FOOD), new Tile(GameObject.PACMAN), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.WALL), new Tile(), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
         });
         int result = board.calculateScore();
         assertEquals(1, result);
@@ -103,9 +103,9 @@ public class BoardTests {
     @Test
     public void Given_BoardWith1FoodEatenAndMonster_When_CalculatingScore_Then_Return1() {
         Board board = new Board(new Tile[][]{
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.PACMAN, false), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.MONSTER, true), new Tile(GameObject.EMPTY, false), new Tile(GameObject.EMPTY, true)},
-                {new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true), new Tile(GameObject.EMPTY, true)}
+                {new Tile(GameObject.FOOD), new Tile(GameObject.PACMAN), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.MONSTER), new Tile(), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
         });
         int result = board.calculateScore();
         assertEquals(1, result);

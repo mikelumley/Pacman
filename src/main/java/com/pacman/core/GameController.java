@@ -61,18 +61,19 @@ public class GameController implements IGameController {
         Tile nextTile = board.getTile(nextPosition);
 
         if (this.canMoveOntoTile(gameObject, nextTile)) {
-            currentTile.setObjectOnTile(GameObject.EMPTY);
+            currentTile.removeObjectFromTile(gameObject);
             if (gameObject == GameObject.PACMAN)
-                currentTile.setFoodOnTile(false);
-            if (nextTile.getObjectOnTile() != GameObject.MONSTER)
-                nextTile.setObjectOnTile(gameObject);
+                currentTile.removeObjectFromTile(GameObject.FOOD);
+            nextTile.addObjectToTile(gameObject);
+//            if (nextTile.getObjectsOnTile() != GameObject.MONSTER)
+//                nextTile.setObjectOnTile(gameObject);
         }
     }
 
     private boolean canMoveOntoTile(GameObject gameObject, Tile nextTile) {
-        boolean isNextTileWall = nextTile.getObjectOnTile() == GameObject.WALL;
+        boolean isNextTileWall = nextTile.getObjectsOnTile().contains(GameObject.WALL);
         boolean isMonster = gameObject == GameObject.MONSTER;
-        boolean isNextTileMonster = nextTile.getObjectOnTile() == GameObject.MONSTER;
+        boolean isNextTileMonster = nextTile.getObjectsOnTile().contains(GameObject.MONSTER);
         return !(isNextTileWall || (isMonster && isNextTileMonster));
     }
 }
