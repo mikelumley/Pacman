@@ -1,6 +1,5 @@
 import com.pacman.core.*;
 import org.junit.Test;
-import com.pacman.utils.BoardFactory;
 
 import java.util.ArrayList;
 
@@ -16,8 +15,10 @@ public class GameControllerTests {
                 {new Tile(), new Tile(), new Tile()}
         });
 
+        GameState startingGameState = new GameState(startingBoard);
+        startingGameState.setCurrentAction(GameAction.UP);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, GameAction.UP);
+        Board result = updater.movePacman(startingGameState);
 
         Board expected = new Board(new Tile[][]{
                 {new Tile(), new Tile(GameObject.PACMAN), new Tile()},
@@ -35,8 +36,10 @@ public class GameControllerTests {
                 {new Tile(), new Tile(), new Tile()}
         });
 
+        GameState startingGameState = new GameState(startingBoard);
+        startingGameState.setCurrentAction(GameAction.DOWN);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, GameAction.DOWN);
+        Board result = updater.movePacman(startingGameState);
 
         Board expected = new Board(new Tile[][]{
                 {new Tile(), new Tile(), new Tile()},
@@ -54,8 +57,10 @@ public class GameControllerTests {
                 {new Tile(), new Tile(), new Tile()}
         });
 
+        GameState startingGameState = new GameState(startingBoard);
+        startingGameState.setCurrentAction(GameAction.LEFT);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, GameAction.LEFT);
+        Board result = updater.movePacman(startingGameState);
 
         Board expected = new Board(new Tile[][]{
                 {new Tile(), new Tile(), new Tile()},
@@ -73,8 +78,10 @@ public class GameControllerTests {
                 {new Tile(), new Tile(), new Tile()}
         });
 
+        GameState startingGameState = new GameState(startingBoard);
+        startingGameState.setCurrentAction(GameAction.RIGHT);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, GameAction.RIGHT);
+        Board result = updater.movePacman(startingGameState);
 
         Board expected = new Board(new Tile[][]{
                 {new Tile(), new Tile(), new Tile()},
@@ -92,8 +99,10 @@ public class GameControllerTests {
                 {new Tile(), new Tile(), new Tile()}
         });
 
+        GameState startingGameState = new GameState(startingBoard);
+        startingGameState.setCurrentAction(GameAction.UP);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, GameAction.UP);
+        Board result = updater.movePacman(startingGameState);
 
         Board expected = new Board(new Tile[][]{
                 {new Tile(), new Tile(), new Tile()},
@@ -111,8 +120,10 @@ public class GameControllerTests {
                 {new Tile(), new Tile(GameObject.PACMAN), new Tile()}
         });
 
+        GameState startingGameState = new GameState(startingBoard);
+        startingGameState.setCurrentAction(GameAction.DOWN);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, GameAction.DOWN);
+        Board result = updater.movePacman(startingGameState);
 
         Board expected = new Board(new Tile[][]{
                 {new Tile(), new Tile(GameObject.PACMAN), new Tile()},
@@ -130,8 +141,10 @@ public class GameControllerTests {
                 {new Tile(), new Tile(), new Tile()}
         });
 
+        GameState startingGameState = new GameState(startingBoard);
+        startingGameState.setCurrentAction(GameAction.LEFT);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, GameAction.LEFT);
+        Board result = updater.movePacman(startingGameState);
 
         Board expected = new Board(new Tile[][]{
                 {new Tile(), new Tile(), new Tile()},
@@ -149,8 +162,10 @@ public class GameControllerTests {
                 {new Tile(), new Tile(), new Tile()}
         });
 
+        GameState startingGameState = new GameState(startingBoard);
+        startingGameState.setCurrentAction(GameAction.LEFT);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, GameAction.LEFT);
+        Board result = updater.movePacman(startingGameState);
 
         Board expected = new Board(new Tile[][]{
                 {new Tile(), new Tile(), new Tile()},
@@ -168,8 +183,10 @@ public class GameControllerTests {
                 {new Tile(), new Tile(), new Tile()}
         });
 
+        GameState startingGameState = new GameState(startingBoard);
+        startingGameState.setCurrentAction(GameAction.UP);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, GameAction.UP);
+        Board result = updater.movePacman(startingGameState);
 
         Board expected = new Board(new Tile[][]{
                 {new Tile(), new Tile(GameObject.WALL), new Tile()},
@@ -187,8 +204,10 @@ public class GameControllerTests {
                 {new Tile(), new Tile(GameObject.WALL), new Tile()}
         });
 
+        GameState startingGameState = new GameState(startingBoard);
+        startingGameState.setCurrentAction(GameAction.DOWN);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, GameAction.DOWN);
+        Board result = updater.movePacman(startingGameState);
 
         Board expected = new Board(new Tile[][]{
                 {new Tile(), new Tile(), new Tile()},
@@ -206,8 +225,10 @@ public class GameControllerTests {
                 {new Tile(), new Tile(), new Tile()}
         });
 
+        GameState startingGameState = new GameState(startingBoard);
+        startingGameState.setCurrentAction(GameAction.LEFT);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, GameAction.LEFT);
+        Board result = updater.movePacman(startingGameState);
 
         Board expected = new Board(new Tile[][]{
                 {new Tile(), new Tile(), new Tile()},
@@ -224,8 +245,10 @@ public class GameControllerTests {
                 {new Tile(), new Tile(), new Tile()}
         });
 
+        GameState startingGameState = new GameState(startingBoard);
+        startingGameState.setCurrentAction(GameAction.RIGHT);
         GameController updater = new GameController();
-        Board result = updater.movePacman(startingBoard, GameAction.RIGHT);
+        Board result = updater.movePacman(startingGameState);
 
         Board expected = new Board(new Tile[][]{
                 {new Tile(), new Tile(), new Tile()},
@@ -418,8 +441,12 @@ public class GameControllerTests {
                 {new Tile(), new Tile(GameObject.PACMAN), new Tile(GameObject.MONSTER)},
                 {new Tile(), new Tile(), new Tile()}
         });
+
+        GameState gameState = new GameState(board);
+        gameState.setCurrentAction(GameAction.RIGHT);
         GameController updater = new GameController();
-        board = updater.movePacman(board, GameAction.RIGHT);
+        updater.movePacman(gameState);
+
         assertTrue(updater.isGameOver(board));
     }
 

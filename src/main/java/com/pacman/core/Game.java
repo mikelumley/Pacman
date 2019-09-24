@@ -10,7 +10,7 @@ public class Game {
 
     private static final int TIME_BETWEEN_UPDATES = 500;
 
-    private Board board;
+    private GameState currentGameState;
     private IInputService inputService;
     private InputAdaptor inputAdaptor = new InputAdaptor();
     private IOutputService outputService;
@@ -20,7 +20,7 @@ public class Game {
 
     public Game(IInputService inputService, IOutputService outputService,
                 IGameController gameController, IMonsterController monsterController) {
-        this.board = BoardFactory.initialiseBoard();
+        this.currentGameState = new GameState(BoardFactory.initialiseBoard());
         this.inputService = inputService;
         this.outputService = outputService;
         this.gameController = gameController;
@@ -29,8 +29,9 @@ public class Game {
 
     public int play() {
         int score = 0;
+        Board currentBoard = this.currentGameState.getBoard();
 
-        while(!this.gameController.isGameOver(this.board)) {
+        while(!this.gameController.isGameOver(currentBoard)) {
             try {
                 Thread.sleep(TIME_BETWEEN_UPDATES);
             } catch (InterruptedException e) {
@@ -45,12 +46,14 @@ public class Game {
                 System.out.print("Exiting\r\n");
                 System.exit(0);
             }
+            else if (gameAction != GameAction.NO_INPUT)
+                this.currentGameState.setCurrentAction(gameAction);
 
-            this.board = this.gameController.movePacman(this.board, gameAction);
-            this.board = this.gameController.moveMonsters(this.board, this.monsterController);
+            currentBoard = this.gameController.movePacman(this.currentGameState);
+            currentBoard = this.gameController.moveMonsters(currentBoard, this.monsterController);
 
-            String boardAsString = this.outputAdaptor.boardToString(board);
-            score = this.gameController.calculateScore(this.board);
+            String boardAsString = this.outputAdaptor.gameStateToString(this.currentGameState);
+            score = this.gameController.calculateScore(currentBoard);
             this.outputService.displayBoard(boardAsString, score);
         }
         return score;

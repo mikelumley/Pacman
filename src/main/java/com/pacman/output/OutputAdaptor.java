@@ -1,9 +1,6 @@
 package com.pacman.output;
 
-import com.pacman.core.Board;
-import com.pacman.core.GameAction;
-import com.pacman.core.GameObject;
-import com.pacman.core.Tile;
+import com.pacman.core.*;
 
 public class OutputAdaptor {
     private static final char MONSTER = 'M';
@@ -18,13 +15,14 @@ public class OutputAdaptor {
     private static final char PACMAN_CLOSED_LEFT_RIGHT = '-';
     private boolean isMouthOpen = true;
 
-    public String boardToString(Board board) {
+    public String gameStateToString(GameState gameState) {
         StringBuilder boardAsString = new StringBuilder();
+        Board board = gameState.getBoard();
 
         for(Tile[] row : board.getTiles()) {
             for(Tile tile : row) {
                 if (tile.getObjectsOnTile().contains(GameObject.PACMAN))
-                    boardAsString.append(this.getPacmanSymbol(board.getLastAction()));
+                    boardAsString.append(this.getPacmanSymbol(gameState.getCurrentAction()));
                 else if (tile.getObjectsOnTile().contains(GameObject.MONSTER))
                     boardAsString.append(MONSTER);
                 else if (tile.getObjectsOnTile().contains(GameObject.FOOD))

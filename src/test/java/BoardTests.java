@@ -1,10 +1,13 @@
-import com.pacman.core.*;
+import com.pacman.core.Board;
+import com.pacman.core.Coordinates;
+import com.pacman.core.GameObject;
+import com.pacman.core.Tile;
 import org.junit.Test;
-import com.pacman.utils.BoardFactory;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class BoardTests {
 

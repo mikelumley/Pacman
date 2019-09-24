@@ -6,7 +6,6 @@ public class Board {
     private Tile[][] tiles;
     private int numberOfRows;
     private int numberOfCols;
-    private GameAction lastAction = GameAction.UP;
 
     public Board(Tile[][] tiles) {
         this.tiles = tiles;
@@ -28,14 +27,6 @@ public class Board {
 
     public int getNumberOfCols() {
         return this.numberOfCols;
-    }
-
-    public GameAction getLastAction() {
-        return this.lastAction;
-    }
-
-    public void setLastAction(GameAction gameAction) {
-        this.lastAction = gameAction;
     }
 
     public Coordinates findPacman() {

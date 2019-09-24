@@ -11,11 +11,10 @@ public class GameController implements IGameController {
     }
 
     @Override
-    public Board movePacman(Board board, GameAction gameAction) {
-        if (gameAction != GameAction.NO_INPUT)
-            board.setLastAction(gameAction);
+    public Board movePacman(GameState currentGameState) {
+        Board board = currentGameState.getBoard();
         Coordinates currentPosition = board.findPacman();
-        Coordinates nextPosition = this.calculateNextPosition(board, currentPosition, board.getLastAction());
+        Coordinates nextPosition = this.calculateNextPosition(board, currentPosition, currentGameState.getCurrentAction());
         this.moveGameObject(board, GameObject.PACMAN, currentPosition, nextPosition);
         return board;
     }
