@@ -17,11 +17,11 @@ public class ConsoleOutputService implements IOutputService {
 
     @Override
     public void displayBoard(GameState gameState, int score) {
-        String boardAsString = this.convertGameStateToString(gameState);
+        String gameStateAsString = this.convertGameStateToString(gameState);
         // Clear terminal
         System.out.print("\033[H\033[2J");
         System.out.print("Score: " + score + "\r\n\r\n");
-        System.out.print(boardAsString + "\r\n");
+        System.out.print(gameStateAsString + "\r\n");
     }
 
     @Override

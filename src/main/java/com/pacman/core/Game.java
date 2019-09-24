@@ -24,7 +24,7 @@ public class Game {
     }
 
     public int play() {
-        int score = 0;
+        int currentScore = 0;
         Board currentBoard = this.currentGameState.getBoard();
 
         while(!this.gameController.isGameOver(currentBoard)) {
@@ -46,12 +46,12 @@ public class Game {
 
             currentBoard = this.gameController.movePacman(this.currentGameState);
             currentBoard = this.gameController.moveMonsters(currentBoard, this.monsterController);
+            currentScore = this.gameController.calculateScore(currentBoard);
 
-            score = this.gameController.calculateScore(currentBoard);
-            this.outputService.displayBoard(this.currentGameState, score);
+            this.outputService.displayBoard(this.currentGameState, currentScore);
 
             this.currentGameState.setPacmanMouthOpen(!this.currentGameState.isPacmanMouthOpen());
         }
-        return score;
+        return currentScore;
     }
 }

@@ -7,7 +7,7 @@ public class GameController implements IGameController {
     @Override
     public boolean isGameOver(Board board) {
         int foodRemaining = board.findFoodRemaining();
-        return foodRemaining == 0 || board.findPacman() == null;
+        return foodRemaining == 0 || board.isPacmanDead();
     }
 
     @Override
@@ -76,8 +76,6 @@ public class GameController implements IGameController {
         if (this.canMoveOntoTile(gameObject, nextTile)) {
             currentTile.removeObjectFromTile(gameObject);
             nextTile.addObjectToTile(gameObject);
-            if (nextTile.getObjectsOnTile().contains(GameObject.PACMAN) && nextTile.getObjectsOnTile().contains(GameObject.MONSTER))
-                nextTile.removeObjectFromTile(GameObject.PACMAN);
             if (gameObject == GameObject.PACMAN)
                 currentTile.removeObjectFromTile(GameObject.FOOD);
         }
