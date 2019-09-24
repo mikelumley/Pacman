@@ -1,9 +1,7 @@
 package com.pacman.core;
 
 import com.pacman.input.IInputService;
-import com.pacman.input.InputAdaptor;
 import com.pacman.output.IOutputService;
-import com.pacman.output.OutputAdaptor;
 import com.pacman.utils.BoardFactory;
 
 public class Game {
@@ -12,9 +10,7 @@ public class Game {
 
     private GameState currentGameState;
     private IInputService inputService;
-    private InputAdaptor inputAdaptor = new InputAdaptor();
     private IOutputService outputService;
-    private OutputAdaptor outputAdaptor = new OutputAdaptor();
     private IGameController gameController;
     private IMonsterController monsterController;
 
@@ -38,8 +34,7 @@ public class Game {
                 e.printStackTrace();
             }
 
-            int characterCode = this.inputService.readUserInput();
-            GameAction gameAction = this.inputAdaptor.inputToAction(characterCode);
+            GameAction gameAction = this.inputService.readUserInput();
 
             if (gameAction == GameAction.EXIT) {
                 this.inputService.closeInputService();
@@ -52,9 +47,8 @@ public class Game {
             currentBoard = this.gameController.movePacman(this.currentGameState);
             currentBoard = this.gameController.moveMonsters(currentBoard, this.monsterController);
 
-            String boardAsString = this.outputAdaptor.gameStateToString(this.currentGameState);
             score = this.gameController.calculateScore(currentBoard);
-            this.outputService.displayBoard(boardAsString, score);
+            this.outputService.displayBoard(this.currentGameState, score);
 
             this.currentGameState.setPacmanMouthOpen(!this.currentGameState.isPacmanMouthOpen());
         }

@@ -1,10 +1,17 @@
 package com.pacman.input;
 
+import com.pacman.core.GameAction;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ConsoleKeyboardInputService implements IInputService{
+    private static final int EXIT_CODE = 3;
+    private static final int W_CODE = 119;
+    private static final int S_CODE = 115;
+    private static final int A_CODE = 97;
+    private static final int D_CODE = 100;
 
     private InputStreamReader consoleInputStream = new InputStreamReader(System.in);
     private BufferedReader bufferedConsoleInputReader = new BufferedReader(consoleInputStream);
@@ -22,7 +29,7 @@ public class ConsoleKeyboardInputService implements IInputService{
     }
 
     @Override
-    public int readUserInput() {
+    public GameAction readUserInput() {
         int characterCode = 0;
         try {
             if (bufferedConsoleInputReader.ready())
@@ -32,7 +39,21 @@ public class ConsoleKeyboardInputService implements IInputService{
             e.printStackTrace();
             System.exit(1);
         }
-        return characterCode;
+
+        switch (characterCode) {
+            case EXIT_CODE:
+                return GameAction.EXIT;
+            case W_CODE:
+                return GameAction.UP;
+            case S_CODE:
+                return GameAction.DOWN;
+            case A_CODE:
+                return GameAction.LEFT;
+            case D_CODE:
+                return GameAction.RIGHT;
+            default:
+                return GameAction.NO_INPUT;
+        }
     }
 
     @Override
