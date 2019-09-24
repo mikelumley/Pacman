@@ -2,6 +2,7 @@ import com.pacman.core.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -340,13 +341,9 @@ public class GameControllerTests {
 
     @Test
     public void Given_BoardWithMonsterAtMiddle_When_MonsterMoves_Then_MonsterDoesNotEatFood() {
-        ArrayList<GameObject> objectsOnMonsterTile = new ArrayList<>();
-        objectsOnMonsterTile.add(GameObject.MONSTER);
-        objectsOnMonsterTile.add(GameObject.FOOD);
-
         Board startingBoard = new Board(new Tile[][]{
                 {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
-                {new Tile(GameObject.FOOD), new Tile(objectsOnMonsterTile), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(new ArrayList<>(Arrays.asList(GameObject.FOOD, GameObject.MONSTER))), new Tile(GameObject.FOOD)},
                 {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
         });
 
@@ -354,12 +351,8 @@ public class GameControllerTests {
         IMonsterController monsterController = new StubMonsterController(GameAction.UP);
         Board result = updater.moveMonsters(startingBoard, monsterController);
 
-        ArrayList<GameObject> expectedObjectsOnMonsterTile = new ArrayList<>();
-        expectedObjectsOnMonsterTile.add(GameObject.FOOD);
-        expectedObjectsOnMonsterTile.add(GameObject.MONSTER);
-
         Board expected = new Board(new Tile[][]{
-                {new Tile(GameObject.FOOD), new Tile(expectedObjectsOnMonsterTile), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.FOOD), new Tile(new ArrayList<>(Arrays.asList(GameObject.FOOD, GameObject.MONSTER))), new Tile(GameObject.FOOD)},
                 {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
                 {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
         });
@@ -368,13 +361,9 @@ public class GameControllerTests {
 
     @Test
     public void Given_BoardWith2Monsters_When_MonsterMovesOntoOtherMonster_Then_MonsterStays() {
-        ArrayList<GameObject> objectsOnMonsterTile = new ArrayList<>();
-        objectsOnMonsterTile.add(GameObject.MONSTER);
-        objectsOnMonsterTile.add(GameObject.FOOD);
-
         Board startingBoard = new Board(new Tile[][]{
                 {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
-                {new Tile(GameObject.WALL), new Tile(objectsOnMonsterTile), new Tile(objectsOnMonsterTile)},
+                {new Tile(GameObject.WALL), new Tile(new ArrayList<>(Arrays.asList(GameObject.FOOD, GameObject.MONSTER))), new Tile(new ArrayList<>(Arrays.asList(GameObject.FOOD, GameObject.MONSTER)))},
                 {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
         });
         GameController updater = new GameController();
@@ -383,7 +372,7 @@ public class GameControllerTests {
 
         Board expected = new Board(new Tile[][]{
                 {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
-                {new Tile(GameObject.WALL), new Tile(objectsOnMonsterTile), new Tile(objectsOnMonsterTile)},
+                {new Tile(GameObject.WALL), new Tile(new ArrayList<>(Arrays.asList(GameObject.FOOD, GameObject.MONSTER))), new Tile(new ArrayList<>(Arrays.asList(GameObject.FOOD, GameObject.MONSTER)))},
                 {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
         });
         assertArrayEquals(expected.getTiles(), result.getTiles());

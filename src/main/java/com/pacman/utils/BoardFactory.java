@@ -11,7 +11,7 @@ public class BoardFactory {
     public static Board initialiseBoard() {
         Tile[][] tiles = {
                 {new Tile(GameObject.WALL), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.WALL), new Tile(GameObject.FOOD)},
-                {new Tile(GameObject.WALL), new Tile(new ArrayList<>(Arrays.asList(GameObject.MONSTER, GameObject.FOOD))), new Tile(GameObject.FOOD), new Tile(GameObject.PACMAN), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
+                {new Tile(GameObject.WALL), new Tile(new ArrayList<>(Arrays.asList(GameObject.FOOD, GameObject.MONSTER))), new Tile(GameObject.FOOD), new Tile(GameObject.PACMAN), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)},
                 {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.WALL), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.WALL), new Tile(GameObject.FOOD)},
                 {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.WALL), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.WALL), new Tile(GameObject.FOOD)},
                 {new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.WALL), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD), new Tile(GameObject.FOOD)}
