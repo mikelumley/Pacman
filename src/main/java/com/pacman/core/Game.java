@@ -55,6 +55,8 @@ public class Game {
             String boardAsString = this.outputAdaptor.gameStateToString(this.currentGameState);
             score = this.gameController.calculateScore(currentBoard);
             this.outputService.displayBoard(boardAsString, score);
+
+            this.currentGameState.setPacmanMouthOpen(!this.currentGameState.isPacmanMouthOpen());
         }
         return score;
     }

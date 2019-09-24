@@ -13,7 +13,6 @@ public class OutputAdaptor {
     private static final char PACMAN_OPEN_RIGHT = '<';
     private static final char PACMAN_CLOSED_UP_DOWN = '|';
     private static final char PACMAN_CLOSED_LEFT_RIGHT = '-';
-    private boolean isMouthOpen = true;
 
     public String gameStateToString(GameState gameState) {
         StringBuilder boardAsString = new StringBuilder();
@@ -21,8 +20,12 @@ public class OutputAdaptor {
 
         for(Tile[] row : board.getTiles()) {
             for(Tile tile : row) {
-                if (tile.getObjectsOnTile().contains(GameObject.PACMAN))
-                    boardAsString.append(this.getPacmanSymbol(gameState.getCurrentAction()));
+                if (tile.getObjectsOnTile().contains(GameObject.PACMAN)) {
+                    GameAction currentAction = gameState.getCurrentAction();
+                    boolean isMouthOpen = gameState.isPacmanMouthOpen();
+                    char pacmanSymbol = this.getPacmanSymbol(currentAction, isMouthOpen);
+                    boardAsString.append(pacmanSymbol);
+                }
                 else if (tile.getObjectsOnTile().contains(GameObject.MONSTER))
                     boardAsString.append(MONSTER);
                 else if (tile.getObjectsOnTile().contains(GameObject.FOOD))
@@ -37,33 +40,30 @@ public class OutputAdaptor {
         return boardAsString.toString();
     }
 
-    private char getPacmanSymbol(GameAction pacmanDirection) {
-        char pacmanSymbol = PACMAN_OPEN_UP;
-
+    private char getPacmanSymbol(GameAction pacmanDirection, boolean isMouthOpen) {
         if (isMouthOpen) {
-            if (pacmanDirection == GameAction.UP) {
-                pacmanSymbol = PACMAN_OPEN_UP;
-            }
-            else if (pacmanDirection == GameAction.DOWN) {
-                pacmanSymbol = PACMAN_OPEN_DOWN;
-            }
-            else if (pacmanDirection == GameAction.LEFT) {
-                pacmanSymbol = PACMAN_OPEN_LEFT;
-            }
-            else if (pacmanDirection == GameAction.RIGHT) {
-                pacmanSymbol = PACMAN_OPEN_RIGHT;
+            switch (pacmanDirection) {
+                default :
+                case UP :
+                    return PACMAN_OPEN_UP;
+                case DOWN :
+                    return PACMAN_OPEN_DOWN;
+                case LEFT :
+                    return PACMAN_OPEN_LEFT;
+                case RIGHT :
+                    return PACMAN_OPEN_RIGHT;
             }
         }
         else{
-            if (pacmanDirection == GameAction.UP || pacmanDirection == GameAction.DOWN) {
-                pacmanSymbol = PACMAN_CLOSED_UP_DOWN;
-            }
-            else if (pacmanDirection == GameAction.LEFT || pacmanDirection == GameAction.RIGHT) {
-                pacmanSymbol = PACMAN_CLOSED_LEFT_RIGHT;
+            switch (pacmanDirection) {
+                default :
+                case UP :
+                case DOWN :
+                    return PACMAN_CLOSED_UP_DOWN;
+                case LEFT :
+                case RIGHT :
+                    return PACMAN_CLOSED_LEFT_RIGHT;
             }
         }
-
-        isMouthOpen = !isMouthOpen;
-        return pacmanSymbol;
     }
 }

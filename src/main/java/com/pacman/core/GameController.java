@@ -14,7 +14,8 @@ public class GameController implements IGameController {
     public Board movePacman(GameState currentGameState) {
         Board board = currentGameState.getBoard();
         Coordinates currentPosition = board.findPacman();
-        Coordinates nextPosition = this.calculateNextPosition(board, currentPosition, currentGameState.getCurrentAction());
+        GameAction currentAction = currentGameState.getCurrentAction();
+        Coordinates nextPosition = this.calculateNextPosition(board, currentPosition, currentAction);
         this.moveGameObject(board, GameObject.PACMAN, currentPosition, nextPosition);
         return board;
     }
