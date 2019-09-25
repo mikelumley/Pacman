@@ -14,4 +14,4 @@ Pacman is controled using the W, A, S and D keys. The game can be exited at anyt
 - The grid wraps around so pacman or monsters are able to move from the right most position to the left most position and vice versa, the same is true for up and down.
 - Pacman and Monsters can't move onto walls and will stay in place until their direction is changed to avoid the wall.
 - Only Pacman can eat food.
-- com.pacman.core.Game ends when all food has been eaten or Pacman is eaten by a monster.
+- Game ends when all food has been eaten or Pacman is eaten by a monster.
